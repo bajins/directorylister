@@ -175,7 +175,7 @@ if(file_exists($md_file)){
             if (ScrollHeight_body > InnerHeight_window) {
                 if (ClientHeight_top > InnerHeight_window) {
                     container_top.style.marginBottom = '0';
-                    container_page.style.marginBottom = '0';
+                    // container_page.style.marginBottom = '0';
                     if (document.getElementById("container_readme")) {
                         container_readme.style.marginTop = '20px';
                     }
@@ -190,7 +190,7 @@ if(file_exists($md_file)){
             } else {
                 if (ScrollHeight_body < ClientHeight_top1) {
                     container_top.style.marginBottom = '0';
-                    container_page.style.marginBottom = '0';
+                    // container_page.style.marginBottom = '0';
                     if (document.getElementById("container_readme")) {
                         container_readme.style.marginTop = '20px';
                     }
