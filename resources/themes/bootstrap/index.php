@@ -140,9 +140,8 @@ if(file_exists($md_file)){
 
         function anchorPositioning() {
             var url = window.location.href; //获取整个 URL 为字符串。
-            if (url.indexOf("?") != -1) {
-                var str = url.substr(1);
-                var divId = str.split("#")[1];
+            if (url.indexOf("#") != -1) {
+                var divId = url.split("#")[1];
                 // document.getElementById(divId).scrollIntoView(true);
                 // window.location.hash = divId;
                 $('html,body').animate({
