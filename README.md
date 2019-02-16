@@ -104,6 +104,6 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 
 ---
 
-我的导航站：https://www.woytu.com
+我的导航站：https://www.bajins.com
 
 本程序基于[逗比魔改](https://github.com/ToyoDAdoubi/DirectoryLister)并基于[Directory Lister原版](http://www.directorylister.com)魔改
