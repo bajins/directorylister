@@ -145,7 +145,7 @@ if(file_exists($md_file)){
                 // document.getElementById(divId).scrollIntoView(true);
                 // window.location.hash = divId;
                 $('html,body').animate({
-                    scrollTop: $("#" + divId).offset().top - 180 + "px"
+                    scrollTop: $("#" + divId).offset().top - 150 + "px"
                 }, 500);
             }
         }
