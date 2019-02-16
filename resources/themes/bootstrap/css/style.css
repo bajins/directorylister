@@ -1,13 +1,8 @@
 /* ---------------------------------------------------------------------------------------------- */
 
-
-/* -----| GENERAL |------------------------------------------------------------------------------ */
-
-
-/* ---------------------------------------------------------------------------------------------- */
-
 * {
     margin: 0;
+    box-sizing: border-box;
 }
 
 html,
@@ -16,8 +11,13 @@ body {
 }
 
 body {
+    color: #24292e;
     padding: 70px 0 0;
     background-color: #fff;
+}
+
+div {
+    display: block;
 }
 
 body.breadcrumb-fixed {
@@ -29,6 +29,8 @@ body.breadcrumb-fixed {
     min-height: 100%;
     /* equal to footer height */
     margin-bottom: -100px;
+    /* padding-right: 0px;
+    padding-left: 0px; */
 }
 
 footer.container {
@@ -38,7 +40,6 @@ footer.container {
 
 .container:after {
     content: "";
-    display: block;
 }
 
 
@@ -74,10 +75,13 @@ footer.container {
     font-family: "Microsoft YaHei", "微软雅黑", "黑体", "宋体", sans-serif;
     font-weight: bold;
     padding: 10px 15px;
+    background-color: #f1f8ff;
+    border: 1px solid #c8e1ff;
 }
 
 #directory-listing {
     font-family: "Microsoft YaHei", "微软雅黑", "黑体", "宋体", sans-serif;
+    border: 1px solid #dfe2e5;
 }
 
 #directory-listing li {
@@ -227,11 +231,61 @@ footer.container {
 
 .page-content {
     margin-top: 40px;
- 	margin-bottom: 50px;
+    margin-bottom: 10px;
 }
+
+
+/* =================== README ================== */
 
 .readme-background {
     margin-bottom: 20px;
+    background-color: #fff;
+    /* border: 1px solid #d1d5da; */
+    border-radius: 3px;
+    /* line-height: 1.25; */
+}
+
+.Box-header {
+    background-color: #f6f8fa;
+    border: 1px solid #d1d5da;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    /* margin: -1px -1px 0; */
+    padding: 8px 16px;
+}
+
+.px-2 {
+    padding-right: 8px!important;
+    padding-left: 8px!important;
+}
+
+.clearfix:before {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.Box-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.pr-3 {
+    padding-right: 16px!important;
+}
+
+.octicon {
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: text-top;
+    vertical-align: text-bottom;
 }
 
 
@@ -244,7 +298,10 @@ footer.container {
 .readme {
     background-color: #fefefe;
     padding: 20px;
-    border: 1px solid #ececec;
+    /* margin-top: 30px; */
+    /* border: 1px solid #ececec; */
+    border: 1px solid #d1d5da;
+    border-top: 0px;
 }
 
 .readme hr {
