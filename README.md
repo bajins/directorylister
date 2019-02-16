@@ -8,7 +8,7 @@
 ### 修改各种细节处！
 - 比如README的上下边距
 - 添加对表格样式多样化的支持
-- 添加对锚点定位支持
+- 添加对锚点定位支持，使用示例：https://file.woytu.com/?dir=DeveloperTool#Xshell
  
 ![新旧式样手机效果对比](https://github.com/ToyoDAdoubiBackup/DirectoryLister/raw/master/Compared.png)
 
