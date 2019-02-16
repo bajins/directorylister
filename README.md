@@ -11,7 +11,7 @@
 - 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`
   > 示例链接：https://file.woytu.com/?dir=DeveloperTool#Xshell
  
-![新旧式样手机效果对比](https://github.com/ToyoDAdoubiBackup/DirectoryLister/raw/master/Compared.png)
+![新旧式样手机效果对比](/Compared.png)
 
 ### 演示示例：
 
