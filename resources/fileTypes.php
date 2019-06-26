@@ -1,5 +1,6 @@
 <?php
-
+// http://www.fontawesome.com.cn/faicons/#file-type
+// https://fontawesome.com/icons?d=gallery&c=files
 return array(
 
     // Archives
@@ -11,26 +12,26 @@ return array(
     'zip'   => 'fa-file-archive-o',
 
     // Audio
-    'aac'   => 'fa-music',
-    'flac'  => 'fa-music',
-    'mid'   => 'fa-music',
-    'midi'  => 'fa-music',
-    'mp3'   => 'fa-music',
-    'ogg'   => 'fa-music',
-    'wma'   => 'fa-music',
-    'wav'   => 'fa-music',
+    'aac'   => 'fa-file-audio-o',
+    'flac'  => 'fa-file-audio-o',
+    'mid'   => 'fa-file-audio-o',
+    'midi'  => 'fa-file-audio-o',
+    'mp3'   => 'fa-file-audio-o',
+    'ogg'   => 'fa-file-audio-o',
+    'wma'   => 'fa-file-audio-o',
+    'wav'   => 'fa-file-audio-o',
 
     // Code
     'c'     => 'fa-code',
-    'class' => 'fa-code',
+    'class' => 'fa-java',
     'cpp'   => 'fa-code',
-    'css'   => 'fa-code',
+    'css'   => 'fa-file-code-o',
     'erb'   => 'fa-code',
     'htm'   => 'fa-code',
-    'html'  => 'fa-code',
-    'java'  => 'fa-code',
-    'js'    => 'fa-code',
-    'php'   => 'fa-code',
+    'html'  => 'fa-html5',
+    'java'  => 'fa-java',
+    'js'    => 'fa-js',
+    'php'   => 'fa-php',
     'pl'    => 'fa-code',
     'py'    => 'fa-code',
     'rb'    => 'fa-code',
@@ -38,31 +39,33 @@ return array(
     'xml'   => 'fa-code',
 
     // Databases
-    'accdb' => 'fa-hdd-o',
-    'db'    => 'fa-hdd-o',
-    'dbf'   => 'fa-hdd-o',
-    'mdb'   => 'fa-hdd-o',
-    'pdb'   => 'fa-hdd-o',
-    'sql'   => 'fa-hdd-o',
+    'accdb' => 'fa-database',
+    'db'    => 'fa-database',
+    'dbf'   => 'fa-database',
+    'mdb'   => 'fa-database',
+    'pdb'   => 'fa-database',
+    'sql'   => 'fa-database',
 
     // Documents
-    'csv'   => 'fa-file-text',
-    'doc'   => 'fa-file-text',
-    'docx'  => 'fa-file-text',
+    'csv'   => 'fa-file-csv',
     'odt'   => 'fa-file-text',
-    'pdf'   => 'fa-file-text',
-    'xls'   => 'fa-file-text',
-    'xlsx'  => 'fa-file-text',
+    'pdf'   => 'fa-file-pdf',
+    'xls'   => 'fa-file-excel',
+    'xlsx'  => 'fa-file-excel',
+    'docx'  => 'fa-file-word',
+    'doc'   => 'fa-file-word',
+    'ppt'   => 'fa-file-powerpoint',
+    'pptx'  => 'fa-file-powerpoint',
 
     // Executables
     'app'   => 'fa-list-alt',
-    'bat'   => 'fa-list-alt',
     'com'   => 'fa-list-alt',
-    'exe'   => 'fa-list-alt',
-    'jar'   => 'fa-list-alt',
-    'msi'   => 'fa-list-alt',
+    'exe'   => 'fa-windows',
+    'jar'   => 'fa-java',
+    'msi'   => 'fa-windows',
     'vb'    => 'fa-list-alt',
-	'apk'    => 'fa fa-android',
+	'apk'   => 'fa fa-android',
+	'ipa'   => 'fa fa-apple',
 
     // Fonts
     'eot'   => 'fa-font',
@@ -85,6 +88,7 @@ return array(
     'psd'   => 'fa-picture-o',
     'tga'   => 'fa-picture-o',
     'tif'   => 'fa-picture-o',
+    'ico'   => 'fa-file-image-o',
 
     // Package Files
     'box'   => 'fa-archive',
@@ -112,16 +116,16 @@ return array(
     'svg'   => 'fa-picture-o',
 
     // Video
-    'avi'   => 'fa-youtube-play',
-    'flv'   => 'fa-youtube-play',
-    'mkv'   => 'fa-youtube-play',
-    'mov'   => 'fa-youtube-play',
-    'mp4'   => 'fa-youtube-play',
-    'mpg'   => 'fa-youtube-play',
-    'ogv'   => 'fa-youtube-play',
+    'avi'   => 'fa-file-video',
+    'flv'   => 'fa-file-video',
+    'mkv'   => 'fa-file-video',
+    'mov'   => 'fa-file-video',
+    'mp4'   => 'fa-file-video',
+    'mpg'   => 'fa-file-video',
+    'ogv'   => 'fa-file-video',
     'webm'  => 'fa-youtube-play',
-    'wmv'   => 'fa-youtube-play',
-    'swf'   => 'fa-youtube-play',
+    'wmv'   => 'fa-file-video',
+    'swf'   => 'fa-file-video',
 
     // Other
     'bak'   => 'fa-floppy',
