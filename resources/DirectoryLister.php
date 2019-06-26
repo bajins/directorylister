@@ -1,14 +1,14 @@
 <?php
 
 /**
- * A simple PHP based directory lister that lists the contents
- * of a directory and all it's sub-directories and allows easy
- * navigation of the files within.
+ * 一个简单的基于PHP的目录列表器，列出了内容
+ * 目录及其所有子目录，并且允许轻松
+ * 导航内的文件。
  *
- * This software distributed under the MIT License
+ * 此软件根据MIT许可证分发
  * http://www.opensource.org/licenses/mit-license.php
  *
- * More info available at http://www.directorylister.com
+ * 有关更多信息，请访问http://www.directorylister.com
  *
  * @author Chris Kankiewicz (http://www.chriskankiewicz.com)
  * @copyright 2015 Chris Kankiewicz
@@ -18,7 +18,7 @@ class DirectoryLister {
     // 定义应用程序版本
     const VERSION = '2.6.1';
 
-    // Reserve some variables
+    // 保留一些变量
     protected $_themeName     = null;
     protected $_directory     = null;
     protected $_appDir        = null;
@@ -29,7 +29,7 @@ class DirectoryLister {
 
 
     /**
-     * DirectoryLister construct function. Runs on object creation.
+     * DirectoryLister构造函数。运行对象创建。
      */
     public function __construct() {
 
@@ -78,10 +78,10 @@ class DirectoryLister {
         return $this->_config['zip_dirs'];
     }
 
-     /**
-     * Creates zipfile of directory
+    /**
+     * 创建目录的zipfile
      *
-     * @param string $directory Relative path of directory to list
+     * @param string $directory 要列出的目录的相对路径
      * @access public
      */
     public function zipDirectory($directory) {
@@ -150,26 +150,26 @@ class DirectoryLister {
 
 
     /**
-     * Creates the directory listing and returns the formatted XHTML
+     * 创建目录列表并返回格式化的XHTML
      *
-     * @param string $directory Relative path of directory to list
-     * @return array Array of directory being listed
+     * @param string $directory 要列出的目录的相对路径
+     * @return array 列出的目录数组
      * @access public
      */
     public function listDirectory($directory) {
 
-        // Set directory
+        // 设置目录，给_directory赋值为$directory
         $directory = $this->setDirectoryPath($directory);
 
-        // Set directory variable if left blank
+        // 如果留空，设置目录变量
         if ($directory === null) {
             $directory = $this->_directory;
         }
 
-        // Get the directory array
+        // 获取目录数组
         $directoryArray = $this->_readDirectory($directory);
 
-        // Return the array
+        // 返回数组
         return $directoryArray;
     }
 
@@ -183,12 +183,12 @@ class DirectoryLister {
      */
     public function listBreadcrumbs($directory = null) {
 
-        // Set directory variable if left blank
+        // 如果留空则设置目录变量
         if ($directory === null) {
             $directory = $this->_directory;
         }
 
-        // Explode the path into an array
+        // 将路径分解为数组
         $dirArray = explode('/', $directory);
 
         // 静态设置主页路径
@@ -413,15 +413,15 @@ class DirectoryLister {
 
 
     /**
-     * Set directory path variable
+     * 设置目录路径变量
      *
-     * @param string $path Path to directory
-     * @return string Sanitizd path to directory
+     * @param string $path 目录的路径
+     * @return string Sanitizd 目录的路径
      * @access public
      */
     public function setDirectoryPath($path = null) {
 
-        // Set the directory global variable
+        // 设置目录全局变量，验证并返回目录路径
         $this->_directory = $this->_setDirectoryPath($path);
 
         return $this->_directory;
@@ -429,9 +429,9 @@ class DirectoryLister {
     }
 
     /**
-     * Get directory path variable
+     * 获取目录路径变量
      *
-     * @return string Sanitizd path to directory
+     * @return string Sanitizd 目录的路径
      * @access public
      */
     public function getDirectoryPath() {
@@ -465,7 +465,7 @@ class DirectoryLister {
 
 
     /**
-     * Validates and returns the directory path
+     * 验证并返回目录路径
      *
      * @param string $dir Directory path
      * @return string Directory path to be listed
@@ -473,49 +473,50 @@ class DirectoryLister {
      */
     protected function _setDirectoryPath($dir) {
 
-        // Check for an empty variable
+        // 检查一个空变量
         if (empty($dir) || $dir == '.') {
             return '.';
         }
 
-        // Eliminate double slashes
+        // 消除双斜线
         while (strpos($dir, '//')) {
             $dir = str_replace('//', '/', $dir);
         }
 
-        // Remove trailing slash if present
+        // 如果存在，删除尾部斜杠
         if(substr($dir, -1, 1) == '/') {
             $dir = substr($dir, 0, -1);
         }
 
-        // Verify file path exists and is a directory
+        // 验证文件路径是否存在并且是目录
         if (!file_exists($dir) || !is_dir($dir)) {
-            // Set the error message
+            // 设置错误消息
             $this->setSystemMessage('danger', '<b>ERROR:</b> 文件路径不存在');
 
-            // Return the web root
+            // 返回Web根目录
             return '.';
         }
 
-        // Prevent access to hidden files
+        // 阻止访问隐藏文件
         if ($this->_isHidden($dir)) {
-            // Set the error message
+            // 设置错误消息
             $this->setSystemMessage('danger', '<b>ERROR:</b> 拒绝访问');
 
-            // Set the directory to web root
+            // 返回Web根目录
             return '.';
         }
 
-        // Prevent access to parent folders
+        // 阻止访问父文件夹
+        // strpos() 函数查找字符串在另一字符串中第一次出现的位置
         if (strpos($dir, '<') !== false || strpos($dir, '>') !== false
         || strpos($dir, '..') !== false || strpos($dir, '/') === 0) {
-            // Set the error message
+            // 设置错误消息
             $this->setSystemMessage('danger', '<b>ERROR:</b> 检测到无效的路径字符串');
 
-            // Set the directory to web root
+            // 返回Web根目录
             return '.';
         } else {
-            // Should stop all URL wrappers (Thanks to Hexatex)
+            // 应该停止所有URL包装器（感谢Hexatex）
             $directoryPath = $dir;
         }
 
@@ -525,52 +526,55 @@ class DirectoryLister {
 
 
     /**
-     * Loop through directory and return array with file info, including
-     * file path, size, modification time, icon and sort order.
+     * 循环目录并返回包含文件信息的数组
+     * 文件路径，大小，修改时间，图标和排序顺序。
      *
-     * @param string $directory Directory path
-     * @param string $sort Sort method (default = natcase)
-     * @return array Array of the directory contents
+     * @param string $ directory目录路径
+     * @param string $ sort Sort方法（默认= natcase）
+     * @return array目录内容的数组
      * @access protected
      */
     protected function _readDirectory($directory, $sort = 'natcase') {
 
-        // Initialize array
+        // 初始化数组
         $directoryArray = array();
 
-        // Get directory contents
+        // 获取目录内容
         $files = scandir($directory);
 
-        // Read files/folders from the directory
+        // 从目录中读取文件/文件夹
         foreach ($files as $file) {
 
             if ($file != '.') {
 
-                // Get files relative path
+                // 获取文件相对路径
                 $relativePath = $directory . '/' . $file;
 
                 if (substr($relativePath, 0, 2) == './') {
                     $relativePath = substr($relativePath, 2);
                 }
 
-                // Don't check parent dir if we're in the root dir
+                // 如果我们在根目录中，请不要检查父目录
                 if ($this->_directory == '.' && $file == '..'){
 
                     continue;
 
                 } else {
 
-                    // Get files absolute path
+                    // 获取文件绝对路径
                     $realPath = realpath($relativePath);
 
-                    // Determine file type by extension
+                    // 按扩展名确定文件类型
                     if (is_dir($realPath)) {
                         $iconClass = 'fa-folder';
                         $sort = 1;
                     } else {
-                        // Get file extension
+                        // 获取文件扩展名
+                        // pathinfo() 函数以数组的形式返回文件路径的信息
+                        // strtolower() 函数把字符串转换为小写。
                         $fileExt = strtolower(pathinfo($realPath, PATHINFO_EXTENSION));
 
+                        // isset() 判断一个变量是否已经声明
                         if (isset($this->_fileTypes[$fileExt])) {
                             $iconClass = $this->_fileTypes[$fileExt];
                         } else {
@@ -585,17 +589,20 @@ class DirectoryLister {
                 if ($file == '..') {
 
                     if ($this->_directory != '.') {
-                        // Get parent directory path
+                        // 获取父目录路径
                         $pathArray = explode('/', $relativePath);
+                        // 销毁单个数组元素
                         unset($pathArray[count($pathArray)-1]);
                         unset($pathArray[count($pathArray)-1]);
+                        // implode() 把数组元素按/组合为字符串
                         $directoryPath = implode('/', $pathArray);
 
                         if (!empty($directoryPath)) {
+                            // 转码并拼接url
                             $directoryPath = '?dir=' . rawurlencode($directoryPath);
                         }
 
-                        // Add file info to the array
+                        // 将文件信息添加到数组中
                         $directoryArray['..'] = array(
                             'file_path'  => $this->_appURL . $directoryPath,
                             'url_path'   => $this->_appURL . $directoryPath,
@@ -608,10 +615,13 @@ class DirectoryLister {
 
                 } elseif (!$this->_isHidden($relativePath)) {
 
-                    // Add all non-hidden files to the array
+                    // 将所有非隐藏文件添加到数组中
                     if ($this->_directory != '.' || $file != 'index.php') {
 
-                        // Build the file path
+                        // 构建文件路径
+                        // implode() 把数组元素按/组合为字符串
+                        // array_map() 函数作用到数组中的每个值上，并返回带有新值的数组
+                        // explode() 函数把字符串打散为数组
                         $urlPath = implode('/', array_map('rawurlencode', explode('/', $relativePath)));
 
                         if (is_dir($relativePath)) {
@@ -620,8 +630,9 @@ class DirectoryLister {
                             $urlPath = $urlPath;
                         }
 
-                        // Add the info to the main array by larry
+                        // 由larry将信息添加到主数组中
                         preg_match('/\/([^\/]*)$/', $relativePath, $matches);
+                        // isset() 判断一个变量是否已经声明
                         $pathname = isset($matches[1]) ? $matches[1] : $relativePath;
                         //$directoryArray[pathinfo($relativePath, PATHINFO_BASENAME)] = array(
                         $directoryArray[$pathname] = array(
@@ -639,11 +650,11 @@ class DirectoryLister {
 
         }
 
-        // Sort the array
+        // 排序数组
         $reverseSort = in_array($this->_directory, $this->_config['reverse_sort']);
         $sortedArray = $this->_arraySort($directoryArray, $this->_config['list_sort_order'], $reverseSort);
 
-        // Return the array
+        // 返回数组
         return $sortedArray;
 
     }

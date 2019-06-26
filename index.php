@@ -1,12 +1,12 @@
 <?php
 
-    // Include the DirectoryLister class
+    // 包含DirectoryLister类
     require_once('resources/DirectoryLister.php');
 
-    // Initialize the DirectoryLister object
+    // 初始化DirectoryLister对象
     $lister = new DirectoryLister();
 
-    // Restrict access to current directory
+    // 限制对当前目录的访问
     ini_set('open_basedir', getcwd());
 
     if (isset($_GET['zip'])) {
@@ -15,22 +15,22 @@
 
     } else {
 
-        // Initialize the directory array
+        // 初始化目录数组
         if (isset($_GET['dir'])) {
             $dirArray = $lister->listDirectory($_GET['dir']);
         } else {
             $dirArray = $lister->listDirectory('.');
         }
 
-        // Define theme path
+        // 定义主题路径
         if (!defined('THEMEPATH')) {
             define('THEMEPATH', $lister->getThemePath());
         }
 
-        // Set path to theme index
+        // 设置主题索引的路径
         $themeIndex = $lister->getThemePath(true) . '/index.php';
 
-        // Initialize the theme
+        // 初始化主题
         if (file_exists($themeIndex)) {
             include($themeIndex);
         } else {
