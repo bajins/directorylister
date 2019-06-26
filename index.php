@@ -17,6 +17,7 @@
 
         // 初始化目录数组
         if (isset($_GET['dir'])) {
+            // 调用DirectoryLister.listDirectory，再调用DirectoryLister._readDirectory
             $dirArray = $lister->listDirectory($_GET['dir']);
         } else {
             $dirArray = $lister->listDirectory('.');
