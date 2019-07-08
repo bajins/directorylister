@@ -302,6 +302,11 @@ footer.container {
     /* border: 1px solid #ececec; */
     border: 1px solid #d1d5da;
     border-top: 0px;
+    /*overflow 属性规定当内容溢出元素框时发生的事情*/
+    /*auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。*/
+    overflow: auto;
+    /*允许在单词内换行*/
+    word-break: break-all;
 }
 
 .readme hr {
@@ -415,26 +420,15 @@ color: #159e83;
     border-top: solid 1px #ddd;
     border-left: solid 1px #ddd;
     margin-bottom: 16px;
-    margin-left: 20px;
     text-indent: 0;
     text-align: center;
+    table-layout: fixed;
+    width: 100%;
 }
 
 .readme table th {
     background-color: #1abc9c;
     color: #fff;
-}
-
-.readme table td,
-.readme table th {
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
-    padding: 10px 15px;
-}
-
-.readme table td:hover {
-    font-weight: 900;
-    background-color: #c0e712;
 }
 
 .readme table tr {
@@ -445,6 +439,25 @@ color: #159e83;
 .readme table tr:hover {
     background-color: #f9f9f9;
     transition: 0.3s;
+}
+
+.readme table td,
+.readme table th {
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    padding: 10px 15px;
+}
+
+.readme table td {
+    /* 溢出的内容部分使用省略号 */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.readme table td:hover {
+    font-weight: 900;
+    background-color: #c0e712;
 }
 
 .readme img {
