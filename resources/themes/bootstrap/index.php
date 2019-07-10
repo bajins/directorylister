@@ -40,13 +40,17 @@ if (file_exists($md_file)) {
     <script src="resources/themes/bootstrap/js/jquery.min.js"></script>
     <!-- JS基本库 -->
     <script src="resources/themes/bootstrap/js/bootstrap.min.js"></script>
-    <!-- JS基本库 -->
+    <!-- JS基本库 代码高亮 -->
     <script src="resources/themes/bootstrap/js/prism.js"></script>
     <!-- 代码高亮JS依赖 -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <?php file_exists('analytics.inc') ? include('analytics.inc') : false; ?>
+
+    <!-- header start -->
+    <?php file_exists('header.php') ? include('header.php') : include($lister->getThemePath(true) . "/default_header.php"); ?>
+    <!-- header end -->
 </head>
 
 <body>
@@ -69,17 +73,17 @@ if (file_exists($md_file)) {
     </div>
     <div class="path-announcement navbar navbar-default navbar-fixed-top">
         <div class="path-announcement2 container">
-            <!-- 顶部公告栏 -->
+            <!-- 顶部公告栏 start -->
             <p style="color:red">
                 <i class="fa fa-volume-down"></i>
-                <a target="_blank" href="https://t.me/joinchat/JLtpdBbs_F7kYd64mI4Jow">Telegram群组</a>
+                <?php file_exists('bulletin.php') ? include('bulletin.php') : include($lister->getThemePath(true) . "/default_bulletin.php"); ?>
             </p>
-            <!-- 顶部公告栏 -->
+            <!-- 顶部公告栏 end -->
         </div>
     </div>
     <div class="container" id="container_top">
         <div class="page-content container" id="container_page">
-            <?php file_exists('header.php') ? include('header.php') : include($lister->getThemePath(true) . "/default_header.php"); ?>
+            <!-- 系统错误消息  -->
             <?php if ($lister->getSystemMessages()) : ?>
                 <?php foreach ($lister->getSystemMessages() as $message) : ?>
                     <div class="alert alert-<?php echo $message['type']; ?>">
@@ -88,6 +92,8 @@ if (file_exists($md_file)) {
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+
+            <!-- content -->
             <div id="directory-list-header">
                 <div class="row">
                     <div class="col-md-7 col-sm-6 col-xs-10">文件</div>
@@ -124,13 +130,15 @@ if (file_exists($md_file)) {
                 <?php endforeach; ?>
             </ul>
         </div>
-        <!-- READMNE 说明 -->
+
+        <!-- READMNE start -->
         <div class="container readme-background" id="readmeTop">
             <div class="Box-header px-2 clearfix">
                 <h3 class="Box-title pr-3">
                     <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path>
-                    </svg> README.md
+                        <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z">
+                        </path>
+                    </svg> README
                 </h3>
             </div>
             <div class="readme" id="readme">
@@ -141,15 +149,26 @@ if (file_exists($md_file)) {
                 ?>
             </div>
         </div>
-        <!-- READMNE 说明 -->
+        <!-- READMNE end -->
+
     </div>
+
+    <!-- footer start -->
     <hr id="footer_hr" style="margin-bottom: 0;margin-top: 40px;" />
-    <?php file_exists('footer.php') ? include('footer.php') : include($lister->getThemePath(true) . "/default_footer.php"); ?>
+    <footer class="container">
+        <div class="footer">
+            <?php file_exists('footer.php') ? include('footer.php') : include($lister->getThemePath(true) . "/default_footer.php"); ?>
+        </div>
+    </footer>
+    <!-- footer end -->
+
     <script type="text/javascript">
+        // 在html全部加载完了才执行
         window.onload = function() {
             anchorPositioning();
             changeDivHeight();
         }
+        // onresize 事件会在窗口或框架被调整大小时发生
         window.onresize = function() {
             changeDivHeight();
         }
