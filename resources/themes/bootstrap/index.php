@@ -25,27 +25,29 @@ if (file_exists($md_file)) {
     <title>woytu Soft
         <?php echo $md_path_all; ?>
     </title>
-    <link rel="shortcut icon" href="resources/themes/bootstrap/img/folder.png" />
     <!-- 网站LOGO -->
-    <link rel="stylesheet" href="resources/themes/bootstrap/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="resources/themes/bootstrap/img/folder.png" />
     <!-- CSS基本库 -->
+    <link rel="stylesheet" href="resources/themes/bootstrap/css/bootstrap.min.css" />
+    <!-- 网站图标CSS式样 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/font-awesome.min.css" />
     <!--<link rel="stylesheet" href="resources/themes/bootstrap/css/all.min.css" />
     <link rel="stylesheet" href="resources/themes/bootstrap/css/v4-shims.min.css" />-->
-    <!-- 网站图标CSS式样 -->
-    <link rel="stylesheet" href="resources/themes/bootstrap/css/style.css" />
     <!-- 网站主要式样 -->
+    <link rel="stylesheet" href="resources/themes/bootstrap/css/style.css" />
+    <!-- 代码高亮样式 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/prism.css" />
-    <!-- 代码高亮式样 -->
+
+    <!-- JS基本库 -->
     <script src="resources/themes/bootstrap/js/jquery.min.js"></script>
     <!-- JS基本库 -->
     <script src="resources/themes/bootstrap/js/bootstrap.min.js"></script>
-    <!-- JS基本库 代码高亮 -->
-    <script src="resources/themes/bootstrap/js/prism.js"></script>
     <!-- 代码高亮JS依赖 -->
+    <script src="resources/themes/bootstrap/js/prism.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
     <?php file_exists('analytics.inc') ? include('analytics.inc') : false; ?>
 
     <!-- header start -->
