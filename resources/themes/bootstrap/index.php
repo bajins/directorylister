@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<?php 
-header("Content-type: text/html; charset=utf-8"); 
+<?php
+header("Content-type: text/html; charset=utf-8");
 $md_path_all = $lister->getListedPath();
 $suffix_array = explode('.', $_SERVER['HTTP_HOST']);
 $suffix = end($suffix_array);
 $md_path = explode($suffix, $md_path_all);
-if($md_path[1] != ""){
-	$md_path_last = substr($md_path[1], -1);;
-	if($md_path_last != "/"){
-		$md_file = ".".$md_path[1]."/README.html";
-	}else{
-		$md_file = ".".$md_path[1]."README.html";
-	}
+if ($md_path[1] != "") {
+    $md_path_last = substr($md_path[1], -1);;
+    if ($md_path_last != "/") {
+        $md_file = "." . $md_path[1] . "/README.html";
+    } else {
+        $md_file = "." . $md_path[1] . "README.html";
+    }
 }
-if(file_exists($md_file)){
-	$md_text = file_get_contents($md_file);
-}else{
-	$md_text = "";
+if (file_exists($md_file)) {
+    $md_text = file_get_contents($md_file);
+} else {
+    $md_text = "";
 }
 ?>
 <html lang="zh-CN">
@@ -30,6 +30,8 @@ if(file_exists($md_file)){
     <link rel="stylesheet" href="resources/themes/bootstrap/css/bootstrap.min.css" />
     <!-- CSS基本库 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/font-awesome.min.css" />
+    <!--<link rel="stylesheet" href="resources/themes/bootstrap/css/all.min.css" />
+    <link rel="stylesheet" href="resources/themes/bootstrap/css/v4-shims.min.css" />-->
     <!-- 网站图标CSS式样 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/style.css" />
     <!-- 网站主要式样 -->
@@ -52,15 +54,15 @@ if(file_exists($md_file)){
         <div class="container">
             <?php $breadcrumbs = $lister->listBreadcrumbs(); ?>
             <p class="navbar-text">
-                <?php foreach($breadcrumbs as $breadcrumb): ?>
-                <?php if ($breadcrumb != end($breadcrumbs)): ?>
-                <a href="<?php echo $breadcrumb['link']; ?>">
-                    <?php echo $breadcrumb['text']; ?>
-                </a>
-                <span class="divider">/</span>
-                <?php else: ?>
-                <?php echo $breadcrumb['text']; ?>
-                <?php endif; ?>
+                <?php foreach ($breadcrumbs as $breadcrumb) : ?>
+                    <?php if ($breadcrumb != end($breadcrumbs)) : ?>
+                        <a href="<?php echo $breadcrumb['link']; ?>">
+                            <?php echo $breadcrumb['text']; ?>
+                        </a>
+                        <span class="divider">/</span>
+                    <?php else : ?>
+                        <?php echo $breadcrumb['text']; ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </p>
         </div>
@@ -68,20 +70,23 @@ if(file_exists($md_file)){
     <div class="path-announcement navbar navbar-default navbar-fixed-top">
         <div class="path-announcement2 container">
             <!-- 顶部公告栏 -->
-            <p style="color:red"><i class="fa fa-volume-down"></i>请帮忙关注微信小程序谢谢！<a href="https://oss.woetu.com/index/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" target="_blank">获取小程序二维码</a></p>
+            <p style="color:red">
+                <i class="fa fa-volume-down"></i>
+                <a target="_blank" href="https://t.me/joinchat/JLtpdBbs_F7kYd64mI4Jow">Telegram群组</a>
+            </p>
             <!-- 顶部公告栏 -->
         </div>
     </div>
     <div class="container" id="container_top">
         <div class="page-content container" id="container_page">
             <?php file_exists('header.php') ? include('header.php') : include($lister->getThemePath(true) . "/default_header.php"); ?>
-            <?php if($lister->getSystemMessages()): ?>
-            <?php foreach ($lister->getSystemMessages() as $message): ?>
-            <div class="alert alert-<?php echo $message['type']; ?>">
-                <?php echo $message['text']; ?>
-                <a class="close" data-dismiss="alert" href="#">&times;</a>
-            </div>
-            <?php endforeach; ?>
+            <?php if ($lister->getSystemMessages()) : ?>
+                <?php foreach ($lister->getSystemMessages() as $message) : ?>
+                    <div class="alert alert-<?php echo $message['type']; ?>">
+                        <?php echo $message['text']; ?>
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    </div>
+                <?php endforeach; ?>
             <?php endif; ?>
             <div id="directory-list-header">
                 <div class="row">
@@ -91,41 +96,52 @@ if(file_exists($md_file)){
                 </div>
             </div>
             <ul id="directory-listing" class="nav nav-pills nav-stacked">
-                <?php foreach($dirArray as $name => $fileInfo): ?>
-                <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
-                    <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
-                        <div class="row">
-                            <span class="file-name col-md-7 col-sm-6 col-xs-9">
+                <?php foreach ($dirArray as $name => $fileInfo) : ?>
+                    <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
+                        <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
+                            <div class="row">
+                                <span class="file-name col-md-7 col-sm-6 col-xs-9">
                                     <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
                                     <?php echo $name; ?>
                                 </span>
-                            <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
+                                <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
                                     <?php echo $fileInfo['file_size']; ?>
                                 </span>
-                            <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
+                                <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
                                     <?php echo $fileInfo['mod_time']; ?>
                                 </span>
-                        </div>
-                    </a>
-                    <?php if (is_file($fileInfo['file_path'])): ?>
-                    <?php else: ?>
-                    <?php if ($lister->containsIndex($fileInfo['file_path'])): ?>
-                    <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if($lister->externalLinksNewWindow()): ?>target="_blank"<?php endif; ?>>
+                            </div>
+                        </a>
+                        <?php if (is_file($fileInfo['file_path'])) : ?>
+                        <?php else : ?>
+                            <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
+                                <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
                                     <i class="fa fa-external-link"></i>
                                 </a>
-                    <?php endif; ?>
-                    <?php endif; ?>
-                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </li>
                 <?php endforeach; ?>
             </ul>
         </div>
         <!-- READMNE 说明 -->
-        <?php
-		if($md_text != ""){
-			echo $md_text;
-		}
-		?>
-            <!-- READMNE 说明 -->
+        <div class="container readme-background" id="readmeTop">
+            <div class="Box-header px-2 clearfix">
+                <h3 class="Box-title pr-3">
+                    <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path>
+                    </svg> README.md
+                </h3>
+            </div>
+            <div class="readme" id="readme">
+                <?php
+                if ($md_text != "") {
+                    echo $md_text;
+                }
+                ?>
+            </div>
+        </div>
+        <!-- READMNE 说明 -->
     </div>
     <hr id="footer_hr" style="margin-bottom: 0;margin-top: 40px;" />
     <?php file_exists('footer.php') ? include('footer.php') : include($lister->getThemePath(true) . "/default_footer.php"); ?>
