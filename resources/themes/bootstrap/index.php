@@ -47,7 +47,7 @@ if (file_exists($md_file)) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+
     <?php file_exists('analytics.inc') ? include('analytics.inc') : false; ?>
 
     <!-- header start -->
@@ -134,23 +134,24 @@ if (file_exists($md_file)) {
         </div>
 
         <!-- READMNE start -->
-        <div class="container readme-background" id="readmeTop">
-            <div class="Box-header px-2 clearfix">
-                <h3 class="Box-title pr-3">
-                    <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z">
-                        </path>
-                    </svg> README
-                </h3>
-            </div>
-            <div class="readme" id="readme">
-                <?php
-                if ($md_text != "") {
-                    echo $md_text;
-                }
-                ?>
-            </div>
-        </div>
+        <?php
+        if ($md_text != "") {
+            // 多行字符串开始
+            $readme_top = '
+                    <div class="container readme-background" id="readmeTop">
+                        <div class="Box-header px-2 clearfix">
+                            <h3 class="Box-title pr-3">
+                                <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z">
+                                    </path>
+                                </svg> README
+                            </h3>
+                        </div>
+                        <div class="readme" id="readme">
+                        ';
+            echo $readme_top, $md_text, "</div>", "</div>";
+        }
+        ?>
         <!-- READMNE end -->
 
     </div>
