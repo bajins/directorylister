@@ -3,20 +3,19 @@
 
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-# [备份库](https://git.woetu.com/bajins/DirectoryLister)
-
 
 ### 修改各种细节处！
 - 比如README的上下边距
 - 添加对表格样式多样化的支持
 - 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`
   > 示例链接：https://file.woytu.com/?dir=DeveloperTool#Xshell
+- 化繁为简：去除顶部链接，如果需要顶部链接版本，请看分支[top-links](https://github.com/woytu/DirectoryLister/tree/top-links)
  
-![新旧式样手机效果对比](/Compared.png)
+![新旧式样手机效果对比](/sample-graph.png)
 
 ### 演示示例：
 
-woytu Soft：https://file.woytu.com
+woytu Soft：https://www.woytu.com
 
 ### 下载安装：
 
