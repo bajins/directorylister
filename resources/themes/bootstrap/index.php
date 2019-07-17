@@ -56,23 +56,6 @@ if (file_exists($md_file)) {
 </head>
 
 <body>
-    <div id="page-navbar" class="path-top navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <?php $breadcrumbs = $lister->listBreadcrumbs(); ?>
-            <p class="navbar-text">
-                <?php foreach ($breadcrumbs as $breadcrumb) : ?>
-                    <?php if ($breadcrumb != end($breadcrumbs)) : ?>
-                        <a href="<?php echo $breadcrumb['link']; ?>">
-                            <?php echo $breadcrumb['text']; ?>
-                        </a>
-                        <span class="divider">/</span>
-                    <?php else : ?>
-                        <?php echo $breadcrumb['text']; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </p>
-        </div>
-    </div>
     <div class="path-announcement navbar navbar-default navbar-fixed-top">
         <div class="path-announcement2 container">
             <!-- 顶部公告栏 start -->

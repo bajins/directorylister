@@ -186,11 +186,6 @@ footer.container {
     }
 }
 
-.path-top {
-    padding-top: 5px;
-    padding-bottom: 1px;
-}
-
 .path-announcement2 {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -198,7 +193,6 @@ footer.container {
 }
 
 .path-announcement {
-    margin-top: 58px;
     background-color: #fafbfc;
     border-bottom: 1px solid #e1e4e8;
 }
@@ -230,7 +224,6 @@ footer.container {
 }
 
 .page-content {
-    margin-top: 40px;
     margin-bottom: 10px;
 }
 
