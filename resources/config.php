@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    // 网站标题
+    'web_title'                 => 'Woytu Soft',
     // 基本设置
     'hide_dot_files'            => true,
     'list_folders_first'        => true,

@@ -98,7 +98,7 @@ class DirectoryLister {
             $filename_no_ext = basename($directory);
 
             if ($directory == '.') {
-                $filename_no_ext = 'woytu Soft';
+                $filename_no_ext = $this->_config['web_title'];
             }
 
             // We deliver a zip file
@@ -194,7 +194,7 @@ class DirectoryLister {
         // 静态设置主页路径
         $breadcrumbsArray[] = array(
             'link' => $this->_appURL,
-            'text' => 'woytu Soft'
+            'text' => $this->_config['web_title']
         );
 
         // Generate breadcrumbs
@@ -257,9 +257,9 @@ class DirectoryLister {
 
 
     /**
-     * Get path of the listed directory
+     * 获取列出的目录的路径
      *
-     * @return string Path of the listed directory
+     * @return string 列出目录的路径
      * @access public
      */
     public function getListedPath() {
@@ -277,7 +277,7 @@ class DirectoryLister {
 
 
     /**
-     * Returns the theme name.
+     * 返回主题名称。
      *
      * @return string Theme name
      * @access public
@@ -289,9 +289,9 @@ class DirectoryLister {
 
 
     /**
-     * Returns open links in another window
+     * 返回另一个窗口中的打开链接
      *
-     * @return boolean Returns true if in config is enabled open links in another window, false if not
+     * @return boolean 如果在启用配置中打开另一个窗口中的链接，则返回true，否则返回false
      * @access public
      */
     public function externalLinksNewWindow() {
@@ -438,18 +438,29 @@ class DirectoryLister {
         return $this->_directory;
     }
 
+    /**
+     * 获取配置
+     * 
+     * @param string $text      配置名称
+     * @return string config    配置值
+     * @access public
+     */
+    public function getConfig($text) {
+        return $this->_config[$text];
+    }
+
 
     /**
-     * Add a message to the system message array
+     * 将消息添加到系统消息数组
      *
-     * @param string $type The type of message (ie - error, success, notice, etc.)
-     * @param string $message The message to be displayed to the user
+     * @param string $type 消息的类型 (ie - error, success, notice, etc.)
+     * @param string $message 要显示给用户的消息
      * @return bool true on success
      * @access public
      */
     public function setSystemMessage($type, $text) {
 
-        // Create empty message array if it doesn't already exist
+        // 创建空消息数组（如果它尚不存在）
         if (isset($this->_systemMessage) && !is_array($this->_systemMessage)) {
             $this->_systemMessage = array();
         }
