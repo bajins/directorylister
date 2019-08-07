@@ -49,13 +49,13 @@ return array(
     // Documents
     'csv'   => 'fa-file-csv',
     'odt'   => 'fa-file-text',
-    'pdf'   => 'fa-file-pdf',
-    'xls'   => 'fa-file-excel',
-    'xlsx'  => 'fa-file-excel',
-    'docx'  => 'fa-file-word',
-    'doc'   => 'fa-file-word',
-    'ppt'   => 'fa-file-powerpoint',
-    'pptx'  => 'fa-file-powerpoint',
+    'pdf'   => 'fa-file-pdf-o',
+    'xls'   => 'fa-file-excel-o',
+    'xlsx'  => 'fa-file-excel-o',
+    'docx'  => 'fa-file-word-o',
+    'doc'   => 'fa-file-word-o',
+    'ppt'   => 'fa-file-powerpoint-o',
+    'pptx'  => 'fa-file-powerpoint-o',
 
     // Executables
     'app'   => 'fa-list-alt',
