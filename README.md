@@ -10,6 +10,8 @@
 - 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`
   > 示例链接：https://file.woytu.com/?dir=DeveloperTool#Xshell
 - 化繁为简：去除顶部链接，如果需要顶部链接版本，请看分支[top-links](https://github.com/woytu/DirectoryLister/tree/top-links)
+- 添加聊天室
+- 添加留言
  
 ![新旧式样手机效果对比](/sample-graph.png)
 

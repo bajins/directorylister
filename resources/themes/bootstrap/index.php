@@ -125,7 +125,8 @@ if (file_exists($md_file)) {
                         <div class="Box-header px-2 clearfix">
                             <h3 class="Box-title pr-3">
                                 <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z">
+                                    <path fill-rule="evenodd" 
+                                        d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z">
                                     </path>
                                 </svg> README
                             </h3>
@@ -136,6 +137,19 @@ if (file_exists($md_file)) {
         }
         ?>
         <!-- READMNE end -->
+
+        <!-- 留言 -->
+        <!-- Valine -->
+        <div id="vcomments"></div>
+
+        <!-- 来必力 -->
+        <!-- <div id="lv-container" data-id="city" data-uid="MTAyMC80NTE3MC8yMTY4OA=="></div> -->
+
+        <!-- Gitalk -->
+        <!-- <div id="gitalk-container"></div> -->
+
+        <!-- Gitment -->
+        <!-- <div id="gitment-container"></div> -->
 
     </div>
 
@@ -160,7 +174,9 @@ if (file_exists($md_file)) {
         }
 
         function anchorPositioning() {
-            var url = window.location.href; //获取整个 URL 为字符串。
+            // 获取整个 URL 为字符串。
+            var url = window.location.href;
+            // 判断URL中是否带#号
             if (url.indexOf("#") != -1) {
                 var divId = url.split("#")[1];
                 // document.getElementById(divId).scrollIntoView(true);
@@ -183,8 +199,6 @@ if (file_exists($md_file)) {
             ClientHeight_top = container_top.clientHeight + 60;
             ClientHeight_top1 = ClientHeight_top + 69;
             ClientHeight_top2 = ClientHeight_top1 - 60;
-
-            //console.log(ScrollHeight_body, InnerHeight_window, container_top.clientHeight, ClientHeight_top, ClientHeight_top1, ClientHeight_top2, InnerHeight_window);
             container_top.style.minHeight = '';
 
             if (ScrollHeight_body > ClientHeight_top2) {
@@ -227,6 +241,51 @@ if (file_exists($md_file)) {
         }
     </script>
 
+    <!-- Valine https://valine.js.org/ -->
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'm9S5QXsdju39LvMs8ooRRIiF-MdYXbMMI',
+            appKey: 'UfBRjySkb4bjPiFuH0Pxe3a9'
+        })
+
+        // 来必力 https://www.livere.com
+        /*(function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') {
+                return;
+            }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');*/
+
+        // Gitalk unpkg.com/docsify/lib/plugins/gitalk.min.js
+        /*const gitalk = new Gitalk({
+            clientID: '40cfe11992c4ef076a4b',
+            clientSecret: 'b43dc6b3740a306bec40c25c2db1ecc6c02e7716',
+            repo: 'woytu.github.io',
+            owner: 'woytu',
+            admin: ['woytu'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        });*/
+
+        // Gitment https://imsun.net/posts/gitment-introduction/
+        /*var gitment = new Gitment({
+            //id: '页面 ID', // 可选。默认为 location.href
+            owner: 'woytu',
+            repo: 'woytu.github.io',
+            oauth: {
+                client_id: '40cfe11992c4ef076a4b',
+                client_secret: 'b43dc6b3740a306bec40c25c2db1ecc6c02e7716',
+            },
+        });*/
+    </script>
+
+    <!-- https://gitter.im -->
     <script>
         ((window.gitter = {}).chat = {}).options = {
             //room替换成自己的聊天室名称即可，room的名称规则是：username/roomname
