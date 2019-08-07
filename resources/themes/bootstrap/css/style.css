@@ -195,6 +195,7 @@ footer.container {
 .path-announcement {
     background-color: #fafbfc;
     border-bottom: 1px solid #e1e4e8;
+    z-index: 50;
 }
 
 .path-announcement p {
