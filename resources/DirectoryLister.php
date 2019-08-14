@@ -1,5 +1,5 @@
 <?php
-
+require_once('./Parsedown.php');
 /**
  * 一个简单的基于PHP的目录列表器，列出了内容
  * 目录及其所有子目录，并且允许轻松
