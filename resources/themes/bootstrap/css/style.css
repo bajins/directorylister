@@ -26,11 +26,6 @@ body.breadcrumb-fixed {
 
 .container {
     max-width: 960px;
-    min-height: 100%;
-    /* equal to footer height */
-    margin-bottom: -100px;
-    /* padding-right: 0px;
-    padding-left: 0px; */
 }
 
 footer.container {

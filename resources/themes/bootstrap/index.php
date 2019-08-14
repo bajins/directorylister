@@ -68,61 +68,60 @@ if (file_exists($md_file)) {
             <!-- 顶部公告栏 end -->
         </div>
     </div>
-    <div class="container" id="container_top">
-        <div class="page-content container" id="container_page">
-            <!-- 系统错误消息  -->
-            <?php if ($lister->getSystemMessages()) : ?>
-            <?php foreach ($lister->getSystemMessages() as $message) : ?>
-            <div class="alert alert-<?php echo $message['type']; ?>">
-                <?php echo $message['text']; ?>
-                <a class="close" data-dismiss="alert" href="#">&times;</a>
-            </div>
-            <?php endforeach; ?>
-            <?php endif; ?>
-
-            <!-- content -->
-            <div id="directory-list-header">
-                <div class="row">
-                    <div class="col-md-7 col-sm-6 col-xs-10">文件</div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 text-right">大小</div>
-                    <div class="col-md-3 col-sm-4 hidden-xs text-right">最后修改时间</div>
-                </div>
-            </div>
-            <ul id="directory-listing" class="nav nav-pills nav-stacked">
-                <?php foreach ($dirArray as $name => $fileInfo) : ?>
-                <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
-                    <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
-                        <div class="row">
-                            <span class="file-name col-md-7 col-sm-6 col-xs-9">
-                                <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
-                                <?php echo $name; ?>
-                            </span>
-                            <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
-                                <?php echo $fileInfo['file_size']; ?>
-                            </span>
-                            <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
-                                <?php echo $fileInfo['mod_time']; ?>
-                            </span>
-                        </div>
-                    </a>
-                    <?php if (is_file($fileInfo['file_path'])) : ?>
-                    <?php else : ?>
-                    <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
-                    <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
-                        <i class="fa fa-external-link"></i>
-                    </a>
-                    <?php endif; ?>
-                    <?php endif; ?>
-                </li>
-                <?php endforeach; ?>
-            </ul>
+    <div class="page-content container" id="container_page">
+        <!-- 系统错误消息  -->
+        <?php if ($lister->getSystemMessages()) : ?>
+        <?php foreach ($lister->getSystemMessages() as $message) : ?>
+        <div class="alert alert-<?php echo $message['type']; ?>">
+            <?php echo $message['text']; ?>
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
         </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
 
-        <!-- READMNE start -->
-        <?php
-        if ($md_text != "") {
-            // 多行字符串开始
-            $readme_top = '
+        <!-- content -->
+        <div id="directory-list-header">
+            <div class="row">
+                <div class="col-md-7 col-sm-6 col-xs-10">文件</div>
+                <div class="col-md-2 col-sm-2 col-xs-2 text-right">大小</div>
+                <div class="col-md-3 col-sm-4 hidden-xs text-right">最后修改时间</div>
+            </div>
+        </div>
+        <ul id="directory-listing" class="nav nav-pills nav-stacked">
+            <?php foreach ($dirArray as $name => $fileInfo) : ?>
+            <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
+                <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
+                    <div class="row">
+                        <span class="file-name col-md-7 col-sm-6 col-xs-9">
+                            <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
+                            <?php echo $name; ?>
+                        </span>
+                        <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
+                            <?php echo $fileInfo['file_size']; ?>
+                        </span>
+                        <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
+                            <?php echo $fileInfo['mod_time']; ?>
+                        </span>
+                    </div>
+                </a>
+                <?php if (is_file($fileInfo['file_path'])) : ?>
+                <?php else : ?>
+                <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
+                <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
+                    <i class="fa fa-external-link"></i>
+                </a>
+                <?php endif; ?>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <!-- READMNE start -->
+    <?php
+    if ($md_text != "") {
+        // 多行字符串开始
+        $readme_top = '
                     <div class="container readme-background" id="readmeTop">
                         <div class="Box-header px-2 clearfix">
                             <h3 class="Box-title pr-3">
@@ -135,25 +134,24 @@ if (file_exists($md_file)) {
                         </div>
                         <div class="readme" id="readme">
                         ';
-            echo $readme_top, $md_text, "</div>", "</div>";
-        }
-        ?>
-        <!-- READMNE end -->
+        echo $readme_top, $md_text, "</div>", "</div>";
+    }
+    ?>
+    <!-- READMNE end -->
 
-        <!-- 留言 -->
-        <!-- Valine -->
-        <div id="vcomments"></div>
+    <!-- 留言 -->
+    <!-- Valine -->
+    <div id="vcomments"></div>
 
-        <!-- 来必力 -->
-        <!-- <div id="lv-container" data-id="city" data-uid="MTAyMC80NTE3MC8yMTY4OA=="></div> -->
+    <!-- 来必力 -->
+    <!-- <div id="lv-container" data-id="city" data-uid="MTAyMC80NTE3MC8yMTY4OA=="></div> -->
 
-        <!-- Gitalk -->
-        <!-- <div id="gitalk-container"></div> -->
+    <!-- Gitalk -->
+    <!-- <div id="gitalk-container"></div> -->
 
-        <!-- Gitment -->
-        <!-- <div id="gitment-container"></div> -->
+    <!-- Gitment -->
+    <!-- <div id="gitment-container"></div> -->
 
-    </div>
 
     <!-- footer start -->
     <hr id="footer_hr" style="margin-bottom: 0;margin-top: 40px;" />
@@ -168,11 +166,10 @@ if (file_exists($md_file)) {
         // 在html全部加载完了才执行
         window.onload = function() {
             anchorPositioning();
-            changeDivHeight();
         }
         // onresize 事件会在窗口或框架被调整大小时发生
         window.onresize = function() {
-            changeDivHeight();
+            anchorPositioning();
         }
 
         function anchorPositioning() {
@@ -184,61 +181,8 @@ if (file_exists($md_file)) {
                 // document.getElementById(divId).scrollIntoView(true);
                 // window.location.hash = divId;
                 $('html,body').animate({
-                    scrollTop: $("#" + divId).offset().top - 150 + "px"
+                    scrollTop: $("#" + divId).offset().top - 50 + "px"
                 }, 500);
-            }
-        }
-
-
-        function changeDivHeight() {
-            if (document.getElementById("container_readme")) {
-                container_readme.style.marginBottom = '0';
-            }
-
-            ScrollHeight_body = document.body.offsetHeight;
-            InnerHeight_window = window.innerHeight;
-            container_top.style.minHeight = '0';
-            ClientHeight_top = container_top.clientHeight + 60;
-            ClientHeight_top1 = ClientHeight_top + 69;
-            ClientHeight_top2 = ClientHeight_top1 - 60;
-            container_top.style.minHeight = '';
-
-            if (ScrollHeight_body > ClientHeight_top2) {
-                footer_hr.style.marginTop = '0';
-            } else {
-                footer_hr.style.marginTop = '40px';
-            }
-
-            if (ScrollHeight_body > InnerHeight_window) {
-                if (ClientHeight_top > InnerHeight_window) {
-                    container_top.style.marginBottom = '0';
-                    // container_page.style.marginBottom = '0';
-                    if (document.getElementById("container_readme")) {
-                        container_readme.style.marginTop = '20px';
-                    }
-                } else {
-                    footer_hr.style.marginTop = '40px';
-                    container_top.style.marginBottom = '';
-                    container_page.style.marginBottom = '';
-                    if (document.getElementById("container_readme")) {
-                        container_readme.style.marginTop = '';
-                    }
-                }
-            } else {
-                if (ScrollHeight_body < ClientHeight_top1) {
-                    container_top.style.marginBottom = '0';
-                    // container_page.style.marginBottom = '0';
-                    if (document.getElementById("container_readme")) {
-                        container_readme.style.marginTop = '20px';
-                    }
-                } else {
-                    footer_hr.style.marginTop = '40px';
-                    container_top.style.marginBottom = '';
-                    container_page.style.marginBottom = '';
-                    if (document.getElementById("container_readme")) {
-                        container_readme.style.marginTop = '';
-                    }
-                }
             }
         }
     </script>
