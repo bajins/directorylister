@@ -72,12 +72,12 @@ if (file_exists($md_file)) {
         <div class="page-content container" id="container_page">
             <!-- 系统错误消息  -->
             <?php if ($lister->getSystemMessages()) : ?>
-                <?php foreach ($lister->getSystemMessages() as $message) : ?>
-                    <div class="alert alert-<?php echo $message['type']; ?>">
-                        <?php echo $message['text']; ?>
-                        <a class="close" data-dismiss="alert" href="#">&times;</a>
-                    </div>
-                <?php endforeach; ?>
+            <?php foreach ($lister->getSystemMessages() as $message) : ?>
+            <div class="alert alert-<?php echo $message['type']; ?>">
+                <?php echo $message['text']; ?>
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+            </div>
+            <?php endforeach; ?>
             <?php endif; ?>
 
             <!-- content -->
@@ -90,30 +90,30 @@ if (file_exists($md_file)) {
             </div>
             <ul id="directory-listing" class="nav nav-pills nav-stacked">
                 <?php foreach ($dirArray as $name => $fileInfo) : ?>
-                    <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
-                        <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
-                            <div class="row">
-                                <span class="file-name col-md-7 col-sm-6 col-xs-9">
-                                    <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
-                                    <?php echo $name; ?>
-                                </span>
-                                <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
-                                    <?php echo $fileInfo['file_size']; ?>
-                                </span>
-                                <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
-                                    <?php echo $fileInfo['mod_time']; ?>
-                                </span>
-                            </div>
-                        </a>
-                        <?php if (is_file($fileInfo['file_path'])) : ?>
-                        <?php else : ?>
-                            <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
-                                <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    </li>
+                <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
+                    <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
+                        <div class="row">
+                            <span class="file-name col-md-7 col-sm-6 col-xs-9">
+                                <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
+                                <?php echo $name; ?>
+                            </span>
+                            <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
+                                <?php echo $fileInfo['file_size']; ?>
+                            </span>
+                            <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
+                                <?php echo $fileInfo['mod_time']; ?>
+                            </span>
+                        </div>
+                    </a>
+                    <?php if (is_file($fileInfo['file_path'])) : ?>
+                    <?php else : ?>
+                    <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
+                    <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                    <?php endif; ?>
+                    <?php endif; ?>
+                </li>
                 <?php endforeach; ?>
             </ul>
         </div>

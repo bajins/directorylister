@@ -16,14 +16,14 @@ return array(
         '*/.ht*',
         'resources',
         'resources/*',
-		'ErrorFiles',
-		'ErrorFiles/*',
+        'ErrorFiles',
+        'ErrorFiles/*',
         'analytics.inc',
         'header.php',
         'footer.php',
-		'*/README.*',
-		'README.*',
-      	'admin',
+        '*/README.*',
+        'README.*',
+        'admin',
         '*.xml'
     ),
 
@@ -33,8 +33,8 @@ return array(
         'index.htm',
         'index.html',
         'index.php',
-		'*/README.*',
-		'README.*'
+        '*/README.*',
+        'README.*'
     ),
 
     // 文件 hash 阈值

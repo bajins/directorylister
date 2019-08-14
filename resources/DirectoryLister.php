@@ -13,7 +13,8 @@
  * @author Chris Kankiewicz (http://www.chriskankiewicz.com)
  * @copyright 2015 Chris Kankiewicz
  */
-class DirectoryLister {
+class DirectoryLister
+{
 
     // 定义应用程序版本
     const VERSION = '2.6.1';
@@ -31,10 +32,11 @@ class DirectoryLister {
     /**
      * DirectoryLister构造函数。运行对象创建。
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         // 设置class目录常量
-        if(!defined('__DIR__')) {
+        if (!defined('__DIR__')) {
             define('__DIR__', dirname(__FILE__));
         }
 
@@ -59,17 +61,17 @@ class DirectoryLister {
 
         // 设置主题名称
         $this->_themeName = $this->_config['theme_name'];
-
     }
 
-     /**
+    /**
      * If it is allowed to zip whole directories
      *
      * @param string $directory Relative path of directory to list
      * @return true or false
      * @access public
      */
-    public function isZipEnabled() {
+    public function isZipEnabled()
+    {
         foreach ($this->_config['zip_disable'] as $disabledPath) {
             if (fnmatch($disabledPath, $this->_directory)) {
                 return false;
@@ -84,7 +86,8 @@ class DirectoryLister {
      * @param string $directory 要列出的目录的相对路径
      * @access public
      */
-    public function zipDirectory($directory) {
+    public function zipDirectory($directory)
+    {
 
         if ($this->_config['zip_dirs']) {
 
@@ -120,10 +123,9 @@ class DirectoryLister {
                 $stream = popen('/usr/bin/zip -' . $this->_config['zip_compression_level'] . ' -r -q - * -x ' . $exclude_list, 'r');
 
                 if ($stream) {
-                   fpassthru($stream);
-                   fclose($stream);
+                    fpassthru($stream);
+                    fclose($stream);
                 }
-
             } else {
 
                 // get a tmp name for the .zip
@@ -142,10 +144,8 @@ class DirectoryLister {
 
                 // clean up the tmp zip file
                 unlink($tmp_zip);
-
             }
         }
-
     }
 
 
@@ -156,7 +156,8 @@ class DirectoryLister {
      * @return array 列出的目录数组
      * @access public
      */
-    public function listDirectory($directory) {
+    public function listDirectory($directory)
+    {
 
         // 设置目录，给_directory赋值为$directory
         $directory = $this->setDirectoryPath($directory);
@@ -181,7 +182,8 @@ class DirectoryLister {
      * @return array Array of breadcrumbs
      * @access public
      */
-    public function listBreadcrumbs($directory = null) {
+    public function listBreadcrumbs($directory = null)
+    {
 
         // 如果留空则设置目录变量
         if ($directory === null) {
@@ -210,7 +212,7 @@ class DirectoryLister {
                 }
 
                 // 删除尾部斜杠
-                if(substr($dirPath, -1) == '/') {
+                if (substr($dirPath, -1) == '/') {
                     $dirPath = substr($dirPath, 0, -1);
                 }
 
@@ -221,9 +223,7 @@ class DirectoryLister {
                     'link' => $link,
                     'text' => $dir
                 );
-
             }
-
         }
 
         // 返回breadcrumb数组
@@ -238,7 +238,8 @@ class DirectoryLister {
      * @return boolean Returns true if directory contains a valid index file, false if not
      * @access public
      */
-    public function containsIndex($dirPath) {
+    public function containsIndex($dirPath)
+    {
 
         // 检查目录是否包含索引文件
         foreach ($this->_config['index_files'] as $indexFile) {
@@ -246,13 +247,10 @@ class DirectoryLister {
             if (file_exists($dirPath . '/' . $indexFile)) {
 
                 return true;
-
             }
-
         }
 
         return false;
-
     }
 
 
@@ -262,7 +260,8 @@ class DirectoryLister {
      * @return string 列出目录的路径
      * @access public
      */
-    public function getListedPath() {
+    public function getListedPath()
+    {
 
         // Build the path
         if ($this->_directory == '.') {
@@ -282,7 +281,8 @@ class DirectoryLister {
      * @return string Theme name
      * @access public
      */
-    public function getThemeName() {
+    public function getThemeName()
+    {
         // Return the theme name
         return $this->_config['theme_name'];
     }
@@ -294,7 +294,8 @@ class DirectoryLister {
      * @return boolean 如果在启用配置中打开另一个窗口中的链接，则返回true，否则返回false
      * @access public
      */
-    public function externalLinksNewWindow() {
+    public function externalLinksNewWindow()
+    {
         return $this->_config['external_links_new_window'];
     }
 
@@ -306,7 +307,8 @@ class DirectoryLister {
      * @return string Path to theme
      * @access public
      */
-    public function getThemePath($absolute = false) {
+    public function getThemePath($absolute = false)
+    {
         if ($absolute) {
             // Set the theme path
             $themePath = $this->_appDir . '/themes/' . $this->_themeName;
@@ -328,7 +330,8 @@ class DirectoryLister {
      * @return array|bool Array of error messages or false
      * @access public
      */
-    public function getSystemMessages() {
+    public function getSystemMessages()
+    {
         if (isset($this->_systemMessage) && is_array($this->_systemMessage)) {
             return $this->_systemMessage;
         } else {
@@ -344,7 +347,8 @@ class DirectoryLister {
      * @return string Human-readable file size
      * @access public
      */
-    function getFileSize($filePath) {
+    function getFileSize($filePath)
+    {
 
         // 获取文件大小
         $bytes = filesize($filePath);
@@ -359,7 +363,6 @@ class DirectoryLister {
         $fileSize = sprintf('%.2f', $bytes / pow(1024, $factor)) . $sizes[$factor];
 
         return $fileSize;
-
     }
 
 
@@ -370,7 +373,8 @@ class DirectoryLister {
      * @return array Array of file hashes
      * @access public
      */
-    public function getFileHash($filePath) {
+    public function getFileHash($filePath)
+    {
 
         // Placeholder array
         $hashArray = array();
@@ -386,8 +390,10 @@ class DirectoryLister {
         }
 
         // Prevent access to parent folders
-        if (strpos($filePath, '<') !== false || strpos($filePath, '>') !== false
-        || strpos($filePath, '..') !== false || strpos($filePath, '/') === 0) {
+        if (
+            strpos($filePath, '<') !== false || strpos($filePath, '>') !== false
+            || strpos($filePath, '..') !== false || strpos($filePath, '/') === 0
+        ) {
             return json_encode($hashArray);
         }
 
@@ -397,18 +403,15 @@ class DirectoryLister {
             // Notify user that file is too large
             $hashArray['md5']  = '[ 文件大小超过阈值 ]';
             $hashArray['sha1'] = '[ 文件大小超过阈值 ]';
-
         } else {
 
             // Generate file hashes
             $hashArray['md5']  = hash_file('md5', $filePath);
             $hashArray['sha1'] = hash_file('sha1', $filePath);
-
         }
 
         // Return the data
         return $hashArray;
-
     }
 
 
@@ -419,13 +422,13 @@ class DirectoryLister {
      * @return string Sanitizd 目录的路径
      * @access public
      */
-    public function setDirectoryPath($path = null) {
+    public function setDirectoryPath($path = null)
+    {
 
         // 设置目录全局变量，验证并返回目录路径
         $this->_directory = $this->_setDirectoryPath($path);
 
         return $this->_directory;
-
     }
 
     /**
@@ -434,7 +437,8 @@ class DirectoryLister {
      * @return string Sanitizd 目录的路径
      * @access public
      */
-    public function getDirectoryPath() {
+    public function getDirectoryPath()
+    {
         return $this->_directory;
     }
 
@@ -445,7 +449,8 @@ class DirectoryLister {
      * @return string config    配置值
      * @access public
      */
-    public function getConfig($text) {
+    public function getConfig($text)
+    {
         return $this->_config[$text];
     }
 
@@ -458,7 +463,8 @@ class DirectoryLister {
      * @return bool true on success
      * @access public
      */
-    public function setSystemMessage($type, $text) {
+    public function setSystemMessage($type, $text)
+    {
 
         // 创建空消息数组（如果它尚不存在）
         if (isset($this->_systemMessage) && !is_array($this->_systemMessage)) {
@@ -482,7 +488,8 @@ class DirectoryLister {
      * @return string Directory path to be listed
      * @access protected
      */
-    protected function _setDirectoryPath($dir) {
+    protected function _setDirectoryPath($dir)
+    {
 
         // 检查一个空变量
         if (empty($dir) || $dir == '.') {
@@ -495,7 +502,7 @@ class DirectoryLister {
         }
 
         // 如果存在，删除尾部斜杠
-        if(substr($dir, -1, 1) == '/') {
+        if (substr($dir, -1, 1) == '/') {
             $dir = substr($dir, 0, -1);
         }
 
@@ -519,8 +526,10 @@ class DirectoryLister {
 
         // 阻止访问父文件夹
         // strpos() 函数查找字符串在另一字符串中第一次出现的位置
-        if (strpos($dir, '<') !== false || strpos($dir, '>') !== false
-        || strpos($dir, '..') !== false || strpos($dir, '/') === 0) {
+        if (
+            strpos($dir, '<') !== false || strpos($dir, '>') !== false
+            || strpos($dir, '..') !== false || strpos($dir, '/') === 0
+        ) {
             // 设置错误消息
             $this->setSystemMessage('danger', '<b>ERROR:</b> 检测到无效的路径字符串');
 
@@ -545,7 +554,8 @@ class DirectoryLister {
      * @return array目录内容的数组
      * @access protected
      */
-    protected function _readDirectory($directory, $sort = 'natcase') {
+    protected function _readDirectory($directory, $sort = 'natcase')
+    {
 
         // 初始化数组
         $directoryArray = array();
@@ -566,10 +576,9 @@ class DirectoryLister {
                 }
 
                 // 如果我们在根目录中，请不要检查父目录
-                if ($this->_directory == '.' && $file == '..'){
+                if ($this->_directory == '.' && $file == '..') {
 
                     continue;
-
                 } else {
 
                     // 获取文件绝对路径
@@ -594,7 +603,6 @@ class DirectoryLister {
 
                         $sort = 2;
                     }
-
                 }
 
                 if ($file == '..') {
@@ -603,8 +611,8 @@ class DirectoryLister {
                         // 获取父目录路径
                         $pathArray = explode('/', $relativePath);
                         // 销毁单个数组元素
-                        unset($pathArray[count($pathArray)-1]);
-                        unset($pathArray[count($pathArray)-1]);
+                        unset($pathArray[count($pathArray) - 1]);
+                        unset($pathArray[count($pathArray) - 1]);
                         // implode() 把数组元素按/组合为字符串
                         $directoryPath = implode('/', $pathArray);
 
@@ -623,7 +631,6 @@ class DirectoryLister {
                             'sort'       => 0
                         );
                     }
-
                 } elseif (!$this->_isHidden($relativePath)) {
 
                     // 将所有非隐藏文件添加到数组中
@@ -655,10 +662,8 @@ class DirectoryLister {
                             'sort'       => $sort
                         );
                     }
-
                 }
             }
-
         }
 
         // 排序数组
@@ -667,7 +672,6 @@ class DirectoryLister {
 
         // 返回数组
         return $sortedArray;
-
     }
 
 
@@ -680,7 +684,8 @@ class DirectoryLister {
      * @return array
      * @access protected
      */
-    protected function _arraySort($array, $sortMethod, $reverse = false) {
+    protected function _arraySort($array, $sortMethod, $reverse = false)
+    {
         // Create empty arrays
         $sortedArray = array();
         $finalArray  = array();
@@ -737,7 +742,6 @@ class DirectoryLister {
                 $sortedArray[1] = array_reverse($sortedArray[1]);
                 $sortedArray[2] = array_reverse($sortedArray[2]);
             }
-
         } else {
 
             foreach ($keys as $key) {
@@ -755,7 +759,6 @@ class DirectoryLister {
             if ($reverse) {
                 $sortedArray[1] = array_reverse($sortedArray[1]);
             }
-
         }
 
         // Merge the arrays
@@ -768,7 +771,6 @@ class DirectoryLister {
 
         // Return sorted array
         return $finalArray;
-
     }
 
 
@@ -779,7 +781,8 @@ class DirectoryLister {
      * @return boolean Returns true if file is in hidden array, false if not
      * @access protected
      */
-    protected function _isHidden($filePath) {
+    protected function _isHidden($filePath)
+    {
 
         // Add dot files to hidden files array
         if ($this->_config['hide_dot_files']) {
@@ -788,7 +791,6 @@ class DirectoryLister {
                 $this->_config['hidden_files'],
                 array('.*', '*/.*')
             );
-
         }
 
         // Compare path array to all hidden file paths
@@ -797,13 +799,10 @@ class DirectoryLister {
             if (fnmatch($hiddenPath, $filePath)) {
 
                 return true;
-
             }
-
         }
 
         return false;
-
     }
 
 
@@ -813,7 +812,8 @@ class DirectoryLister {
      * @return string The application URL
      * @access protected
      */
-    protected function _getAppUrl() {
+    protected function _getAppUrl()
+    {
 
         // Get the server protocol
         if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
@@ -848,14 +848,15 @@ class DirectoryLister {
 
 
     /**
-      * Compares two paths and returns the relative path from one to the other
+     * Compares two paths and returns the relative path from one to the other
      *
      * @param string $fromPath Starting path
      * @param string $toPath Ending path
      * @return string $relativePath Relative path from $fromPath to $toPath
      * @access protected
      */
-    protected function _getRelativePath($fromPath, $toPath) {
+    protected function _getRelativePath($fromPath, $toPath)
+    {
 
         // Define the OS specific directory separator
         if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
@@ -871,14 +872,14 @@ class DirectoryLister {
         // Remove last fromPath array element if it's empty
         $x = count($fromPathArray) - 1;
 
-        if(!trim($fromPathArray[$x])) {
+        if (!trim($fromPathArray[$x])) {
             array_pop($fromPathArray);
         }
 
         // Remove last toPath array element if it's empty
         $x = count($toPathArray) - 1;
 
-        if(!trim($toPathArray[$x])) {
+        if (!trim($toPathArray[$x])) {
             array_pop($toPathArray);
         }
 
@@ -924,7 +925,5 @@ class DirectoryLister {
 
         // Return the relative path
         return $relativePath;
-
     }
-
 }

@@ -64,8 +64,8 @@ return array(
     'jar'   => 'fa-java',
     'msi'   => 'fa-windows',
     'vb'    => 'fa-list-alt',
-	'apk'   => 'fa fa-android',
-	'ipa'   => 'fa fa-apple',
+    'apk'   => 'fa fa-android',
+    'ipa'   => 'fa fa-apple',
 
     // Fonts
     'eot'   => 'fa-font',
