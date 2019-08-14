@@ -477,8 +477,7 @@ class DirectoryLister
     /**
      * 获取README未转换的Text内容
      * 
-     * @param string $text      配置名称
-     * @return string config    配置值
+     * @return string config  配置值
      * @access public
      */
     public function getMarkdownText()
