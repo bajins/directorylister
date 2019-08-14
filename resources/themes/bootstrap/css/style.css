@@ -293,7 +293,7 @@ footer.container {
     border-top: 0px;
     /*overflow 属性规定当内容溢出元素框时发生的事情*/
     /*auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。*/
-    /* overflow: auto; */
+    overflow: auto;
     /*允许在单词内换行*/
     word-break: break-all;
 }
