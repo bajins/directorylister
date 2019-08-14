@@ -128,16 +128,16 @@ $md_text = $lister->getMarkdown();
 
     <!-- 留言 -->
     <!-- Valine -->
-    <div id="vcomments"></div>
+    <div class="container" id="vcomments"></div>
 
     <!-- 来必力 -->
-    <!-- <div id="lv-container" data-id="city" data-uid="MTAyMC80NTE3MC8yMTY4OA=="></div> -->
+    <!-- <div class="container" id="lv-container" data-id="city" data-uid="MTAyMC80NTE3MC8yMTY4OA=="></div> -->
 
     <!-- Gitalk -->
-    <!-- <div id="gitalk-container"></div> -->
+    <!-- <div class="container" id="gitalk-container"></div> -->
 
     <!-- Gitment -->
-    <!-- <div id="gitment-container"></div> -->
+    <!-- <div class="container" id="gitment-container"></div> -->
 
 
     <!-- footer start -->
