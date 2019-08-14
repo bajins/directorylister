@@ -507,7 +507,7 @@ class DirectoryLister
      */
     public function getMarkdownHtml()
     {
-        $md_text = $this->getReadmeText();
+        $md_text = $this->getMarkdownText();
         if ($md_text != "") {
             // https://github.com/erusev/parsedown
             $Parsedown = new Parsedown();
