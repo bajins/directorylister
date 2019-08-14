@@ -67,7 +67,7 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 /etc/init.d/php-fpm restart
 # 重启 PHP生效
 ```
-### 程序放在网站子目录不显示`README.html`的解决方法
+### 程序放在网站子目录不显示`README.md`的解决方法
 
 > 因为程序有个判断 `README.md` 路径的代码，而如果是正常使用域名或IP(即使加上)，都是可以自适应的。
 >
