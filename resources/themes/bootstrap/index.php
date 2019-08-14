@@ -122,7 +122,9 @@ $md_html = $lister->getMarkdownHtml();
                         </div>
                         <div class="readme" id="readme">
                         ';
-        echo $readme_top, $md_html, "</div>", "</div>";
+        echo $readme_top;
+        // echo $md_html;
+        echo "</div>", "</div>";
     }
     ?>
     <!-- READMNE end -->
@@ -172,7 +174,12 @@ $md_html = $lister->getMarkdownHtml();
                     scrollTop: $("#" + divId).offset().top - 50 + "px"
                 }, 500);
             }
+            var mdText="<?php echo $md_text ?>";
+            var md = window.markdownit();
+            var result = md.render(mdText);
+            $("#readme").html(result)
         }
+        
     </script>
 
     <!-- Valine https://valine.js.org/ -->
