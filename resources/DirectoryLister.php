@@ -464,7 +464,7 @@ class DirectoryLister
     public function getMarkdown()
     {
 
-        $md_path_all = getListedPath();
+        $md_path_all = $this->getListedPath();
         $suffix_array = explode('.', $_SERVER['HTTP_HOST']);
         $suffix = end($suffix_array);
         $md_path = explode($suffix, $md_path_all);
