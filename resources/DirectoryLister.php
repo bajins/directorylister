@@ -458,18 +458,76 @@ class DirectoryLister
 
 
     /**
-     * 获取README
+     * 获取README目录
      * 
-     * @return string config    配置值
+     * @return string config  路径
      * @access public
      */
-    public function getMarkdown()
+    public function getReadmePath()
     {
-
         $md_path_all = $this->getListedPath();
         $suffix_array = explode('.', $_SERVER['HTTP_HOST']);
         $suffix = end($suffix_array);
         $md_path = explode($suffix, $md_path_all);
+
+        return $md_path;
+    }
+
+
+    /**
+     * 获取README未转换的Text内容
+     * 
+     * @param string $text      配置名称
+     * @return string config    配置值
+     * @access public
+     */
+    public function getMarkdownText()
+    {
+        $md_path = $this->getReadmePath();
+        if ($md_path[1] == "") {
+            return "";
+        }
+        $md_path_last = substr($md_path[1], -1);
+        if ($md_path_last != "/") {
+            $md_file = "." . $md_path[1] . "/README.md";
+        } else {
+            $md_file = "." . $md_path[1] . "README.md";
+        }
+        if (file_exists($md_file)) {
+            return file_get_contents($md_file);
+        }
+        return "";
+    }
+
+    /**
+     * 获取README.md转换为HTML的文本内容
+     * 
+     * @return string config   html内容
+     * @access public
+     */
+    public function getMarkdownHtml()
+    {
+        $md_text = $this->getReadmeText();
+        if ($md_text != "") {
+            // https://github.com/erusev/parsedown
+            $Parsedown = new Parsedown();
+            return $Parsedown->text($md_text);
+        }
+        return "";
+    }
+
+
+
+    /**
+     * 获取README.html的文本内容
+     * 
+     * @return string config  html内容
+     * @access public
+     */
+    public function getReadmeHtml()
+    {
+
+        $md_path = $this->getReadmePath();
         if ($md_path[1] == "") {
             return "";
         }
@@ -481,25 +539,10 @@ class DirectoryLister
             $md_file = "." . $md_path[1] . "README.html";
         }
         if (file_exists($md_file)) {
-            $md_text = file_get_contents($md_file);
-            return $md_text;
-        }
-
-        if ($md_path_last != "/") {
-            $md_file = "." . $md_path[1] . "/README.md";
-        } else {
-            $md_file = "." . $md_path[1] . "README.md";
-        }
-        if (file_exists($md_file)) {
-            $md_text = file_get_contents($md_file);
-            // https://github.com/erusev/parsedown
-            $Parsedown = new Parsedown();
-            return $Parsedown->text($md_text);
+            return file_get_contents($md_file);
         }
         return "";
     }
-
-
 
 
     /**

@@ -3,7 +3,8 @@
 header("Content-type: text/html; charset=utf-8");
 $config = $lister->getConfig('web_title');
 $md_path_all = $lister->getListedPath();
-$md_text = $lister->getMarkdown();
+$md_text = $lister->getMarkdownText();
+$md_html = $lister->getMarkdownHtml();
 
 ?>
 <html lang="zh-CN">
@@ -121,7 +122,7 @@ $md_text = $lister->getMarkdown();
                         </div>
                         <div class="readme" id="readme">
                         ';
-        echo $readme_top, $md_text, "</div>", "</div>";
+        echo $readme_top, $md_html, "</div>", "</div>";
     }
     ?>
     <!-- READMNE end -->
