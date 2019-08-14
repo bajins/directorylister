@@ -13,6 +13,7 @@
 - [添加gitter聊天室](https://github.com/woytu/DirectoryLister/commit/154df157974ac6f883e3484761ad951e0da90ae6)
 - [添加留言](https://github.com/woytu/DirectoryLister/commit/67de302d611e4cf011d8fdee8b7e649e662a1d76)
 - [修改网站标题为统一在配置文件中设置](https://github.com/woytu/DirectoryLister/commit/0fab9eae60df0926a06a5859f4d528b859b8be4c)
+- 修改[`README.md`支持Markdown语法](https://github.com/woytu/DirectoryLister/blob/68c64d9a95201d1460607f3f85855dcd303fecf5/resources/DirectoryLister.php#L460-L517)，如果不需要Markdown语法版本，请看分支[README-HTML](https://github.com/woytu/DirectoryLister/tree/README-HTML)
  
 ![新旧式样手机效果对比](/sample-graph.png)
 
@@ -45,10 +46,11 @@ woytu Soft：https://www.woytu.com
 │   │    └ index.php            # 网页主文件，其中可以修改顶部公告栏内容
 │   │
 │   ├ DirectoryLister.php       # 核心函数处理文件
+│   ├ Parsedown.php             # Markdown解析依赖
 │   ├ config.php                # 配置文件
 │   └ fileTypes.php             # 文件类型定义图标文件
 │
-├ README.html                   # 该文件夹页面内的 说明简介文件
+├ README.md                     # 该文件夹页面内的 说明简介文件
 ├ index.php                     # 入口文件
 │
 └ ......
@@ -67,9 +69,9 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 ```
 ### 程序放在网站子目录不显示`README.html`的解决方法
 
-> 因为程序有个判断 `README.html` 路径的代码，而如果是正常使用域名或IP(即使加上)，都是可以自适应的。
+> 因为程序有个判断 `README.md` 路径的代码，而如果是正常使用域名或IP(即使加上)，都是可以自适应的。
 >
-> 但是如果把程序放在子目录下，就会无法获取正确 `README.html` 路径，需要你手动修改下程序里的一句代码。
+> 但是如果把程序放在子目录下，就会无法获取正确 `README.md` 路径，需要你手动修改下程序里的一句代码。
 >
 > 假设你将程序放在了子目录 `zimulu` 中（也就是 `http://xxx.xx/zimulu` 才能访问到程序网页）。
 >
@@ -81,9 +83,9 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 
 ### 简介功能说明
 
-> 可以在每个文件夹下面放一个 `README.html` 文件，这个文件里写着简介说明内容即可，格式参考自带的示例文件。
+> 可以在每个文件夹下面放一个 `README.md` 文件，这个文件里写着简介说明内容即可，格式参考自带的示例文件。
 >
-> 为了避免中文乱码，把 `README.html` 文件用`UTF-8无BOM编码`保存！
+> 为了避免中文乱码，把 `README.md` 文件用`UTF-8无BOM编码`保存！
 
 ### 文件修改说明
 
