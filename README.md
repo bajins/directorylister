@@ -58,6 +58,7 @@ woytu Soft：https://www.woytu.com
 ### 不显示文件和目录
 
 > 如果安装`lnmp`一键包上传`DirectoryLister`后，不显示文件和目录，那么可能是`PHP`函数` scandir `被禁用了，取消禁用即可。
+
 ``` bash
 sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 # 取消scandir函数禁用

@@ -334,13 +334,23 @@ footer.container {
     line-height: 2;
 }
 
+.readme p {
+    /* 文本块中首行文本的缩进 */
+    text-indent: 0px;
+}
+
+.readme pre {
+    margin: 10px 0px;
+}
+
 .readme blockquote {
     border-left: 5px solid #ccc;
     background-color: #f1f1f1;
     color: #222;
     font-size: 15px;
-    text-indent: 33px;
     transition: 0.3s;
+    /* padding: 10px 0px; */
+    margin: 10px 0px;
 }
 
 .readme blockquote:hover {
@@ -358,7 +368,6 @@ footer.container {
     line-height: 0;
     -webkit-font-smoothing: antialiased;
     color: #666;
-    text-indent: 0;
     margin-top: 10px;
     margin-left: -39px;
     content: "\f10d";
