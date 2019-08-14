@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <?php
 header("Content-type: text/html; charset=utf-8");
-$md_path_all = $lister->getListedPath();
 $config = $lister->getConfig('web_title');
-$suffix_array = explode('.', $_SERVER['HTTP_HOST']);
-$suffix = end($suffix_array);
-$md_path = explode($suffix, $md_path_all);
-if ($md_path[1] != "") {
-    $md_path_last = substr($md_path[1], -1);;
-    if ($md_path_last != "/") {
-        $md_file = "." . $md_path[1] . "/README.html";
-    } else {
-        $md_file = "." . $md_path[1] . "README.html";
-    }
-}
-if (file_exists($md_file)) {
-    $md_text = file_get_contents($md_file);
-} else {
-    $md_text = "";
-}
+$md_path_all = $lister->getListedPath();
+$md_text = $lister->getMarkdown();
+
 ?>
 <html lang="zh-CN">
 
@@ -46,6 +32,7 @@ if (file_exists($md_file)) {
     <script src="resources/themes/bootstrap/js/bootstrap.min.js"></script>
     <!-- 代码高亮JS依赖 -->
     <script src="resources/themes/bootstrap/js/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.1.0/markdown-it.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

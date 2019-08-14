@@ -456,6 +456,51 @@ class DirectoryLister
 
 
     /**
+     * 获取README
+     * 
+     * @return string config    配置值
+     * @access public
+     */
+    public function getMarkdown()
+    {
+
+        $md_path_all = getListedPath();
+        $suffix_array = explode('.', $_SERVER['HTTP_HOST']);
+        $suffix = end($suffix_array);
+        $md_path = explode($suffix, $md_path_all);
+        if ($md_path[1] == "") {
+            return "";
+        }
+        $md_path_last = substr($md_path[1], -1);
+
+        if ($md_path_last != "/") {
+            $md_file = "." . $md_path[1] . "/README.html";
+        } else {
+            $md_file = "." . $md_path[1] . "README.html";
+        }
+        if (file_exists($md_file)) {
+            $md_text = file_get_contents($md_file);
+            return $md_text;
+        }
+
+        if ($md_path_last != "/") {
+            $md_file = "." . $md_path[1] . "/README.md";
+        } else {
+            $md_file = "." . $md_path[1] . "README.md";
+        }
+        if (file_exists($md_file)) {
+            $md_text = file_get_contents($md_file);
+            // https://github.com/erusev/parsedown
+            $Parsedown = new Parsedown();
+            return $Parsedown->text($md_text);
+        }
+        return "";
+    }
+
+
+
+
+    /**
      * 将消息添加到系统消息数组
      *
      * @param string $type 消息的类型 (ie - error, success, notice, etc.)
