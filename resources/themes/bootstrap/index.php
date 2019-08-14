@@ -33,7 +33,7 @@ $md_html = $lister->getMarkdownHtml();
     <script src="resources/themes/bootstrap/js/bootstrap.min.js"></script>
     <!-- 代码高亮JS依赖 -->
     <script src="resources/themes/bootstrap/js/prism.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.1.0/markdown-it.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.1.0/markdown-it.js"></script> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -123,7 +123,7 @@ $md_html = $lister->getMarkdownHtml();
                         <div class="readme" id="readme">
                         ';
         echo $readme_top;
-        // echo $md_html;
+        echo $md_html;
         echo "</div>", "</div>";
     }
     ?>
@@ -174,10 +174,11 @@ $md_html = $lister->getMarkdownHtml();
                     scrollTop: $("#" + divId).offset().top - 50 + "px"
                 }, 500);
             }
-            var mdText="<?php echo $md_text ?>";
-            var md = window.markdownit();
-            var result = md.render(mdText);
-            $("#readme").html(result)
+            // PHP赋值给js变量
+            // var mdText="<?php //echo $md_text; ?>";
+            // var md = window.markdownit();
+            // var result = md.render(mdText);
+            // $("#readme").html(result);
         }
         
     </script>
