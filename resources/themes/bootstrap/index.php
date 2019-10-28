@@ -5,8 +5,8 @@ header("Content-type: text/html; charset=utf-8");
 $web_title = $lister->getConfig('web_title');
 // 当前路径
 $listed_path = $lister->getListedPath();
-$md_text = $lister->getMarkdownText();
-$md_html = $lister->getMarkdownHtml();
+// 当前目录中的README文档文件内容
+$readme_html = $lister->getReadme();
 // 面包屑导航
 $breadcrumbs = $lister->listBreadcrumbs();
 ?>
@@ -160,7 +160,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
                         <div class="readme" id="readme">
                         ';
         echo $readme_top;
-        echo $md_html;
+        echo $readme_html;
         echo "</div>", "</div>";
     }
     ?>

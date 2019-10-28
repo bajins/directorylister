@@ -7,8 +7,11 @@ return array(
     'hide_dot_files'            => true,
     'list_folders_first'        => true,
     'list_sort_order'           => 'natcasesort',
+    // 主题名称
     'theme_name'                => 'bootstrap',
     'external_links_new_window' => true,
+    // README文档文件的解析模式：html、md
+    'readme_mode'               => "md",
 
     // 隐藏文件
     'hidden_files' => array(
@@ -48,8 +51,8 @@ return array(
     // 允许以zip文件格式下载目录
     'zip_dirs' => false,
 
-    // Stream zip file content directly to the client,
-    // without any temporary file
+    // 直接将zip文件内容流式传输到客户端，
+    // 没有任何临时文件
     'zip_stream' => true,
 
     'zip_compression_level' => 0,

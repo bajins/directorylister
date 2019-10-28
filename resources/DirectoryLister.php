@@ -561,6 +561,30 @@ class DirectoryLister
 
 
     /**
+     * 根据config文件中的readme_mode的值解析README文档文件
+     * 
+     * @return string config  html内容
+     * @access public
+     */
+    public function getReadme()
+    {
+        $readme_mode = $this->getConfig("readme_mode");
+        // 如果配置为空，默认使用Markdown方式
+        if ($readme_mode == "") {
+            return $this->getMarkdownHtml();
+        }
+        // 字符串转大写
+        $readme_mode = strtoupper($readme_mode);
+        // 如果为Markdown
+        if ($readme_mode == "MD") {
+            return $this->getMarkdownHtml();
+        }
+        return  $this->getReadmeHtml();
+    }
+
+
+
+    /**
      * 将消息添加到系统消息数组
      *
      * @param string $type 消息的类型 (ie - error, success, notice, etc.)

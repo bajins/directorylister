@@ -5,17 +5,34 @@
 
 
 ## 自定义修改
+
 - 比如README的上下边距
+
 - 添加对表格样式多样化的支持
+
 - 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`
+
   > 示例链接：https://file.woytu.com/?dir=DeveloperTool#Xshell
+
 - 化繁为简：去除顶部链接，如果需要顶部链接版本，请看分支[top-links](https://github.com/woytu/DirectoryLister/tree/top-links)
+
 - [添加gitter聊天室](https://github.com/woytu/DirectoryLister/commit/154df157974ac6f883e3484761ad951e0da90ae6)
+
 - [添加留言](https://github.com/woytu/DirectoryLister/commit/67de302d611e4cf011d8fdee8b7e649e662a1d76)
+
 - [修改网站标题为统一在配置文件中设置](https://github.com/woytu/DirectoryLister/commit/0fab9eae60df0926a06a5859f4d528b859b8be4c)
+
 - 修改[`README.md`支持Markdown语法](https://github.com/woytu/DirectoryLister/blob/68c64d9a95201d1460607f3f85855dcd303fecf5/resources/DirectoryLister.php#L460-L517)，如果不需要Markdown语法版本，请看分支[README-HTML](https://github.com/woytu/DirectoryLister/tree/README-HTML)
+
+- 添加面包屑导航栏
+
+- 添加配置`readme_mode`（README文档文件的解析模式：html、md）
+
+
  
 ![新旧式样手机效果对比](/sample-graph.png)
+
+
 
 ## 演示示例
 
@@ -29,7 +46,9 @@ woytu Soft：https://www.woytu.com
 
 
 ## 文件结构
-假设你的虚拟主机是 `/home/wwwroot/xxx.xx`
+
+- 假设你的虚拟主机是 `/home/wwwroot/xxx.xx`
+
 ```
 ├─ resources/
 │   ├ themes/
@@ -55,6 +74,7 @@ woytu Soft：https://www.woytu.com
 │
 └ ......
 ```
+
 ## 注意事项：
 
 ### 不显示文件和目录
@@ -67,6 +87,7 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 /etc/init.d/php-fpm restart
 # 重启 PHP生效
 ```
+
 ### 程序放在网站子目录不显示`README.md`的解决方法
 
 > 因为程序有个判断 `README.md` 路径的代码，而如果是正常使用域名或IP(即使加上)，都是可以自适应的。
