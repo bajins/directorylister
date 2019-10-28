@@ -462,7 +462,7 @@ class DirectoryLister
         // 获取config文件中的readme_mode的解析模式
         $readme_mode = $this->getConfig("readme_mode");
         // 如果配置为空，默认使用Markdown方式
-        if ($readme_mode == "" || strtoupper($readme_mode) == "MD") {
+        if ($readme_mode == "" || strtoupper($readme_mode) != "HTML") {
             $md_path =  $md_path . "/README.md";
             // https://github.com/erusev/parsedown
             $Parsedown = new Parsedown();
