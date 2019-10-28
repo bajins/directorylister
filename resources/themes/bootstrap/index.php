@@ -79,7 +79,14 @@ $breadcrumbs = $lister->listBreadcrumbs();
                         </li>
                     <?php else : ?>
                         <li class="breadcrumb-item active">
-                            <?php echo $breadcrumb['text']; ?>
+                            <?php if ($breadcrumb['text'] == $web_title) : ?>
+                                <a href="<?php echo $breadcrumb['link']; ?>">
+                                    <i class="fa fa-home"></i>
+                                    <?php echo $breadcrumb['text']; ?>
+                                </a>
+                            <?php else : ?>
+                                <?php echo $breadcrumb['text']; ?>
+                            <?php endif; ?>
                         </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
