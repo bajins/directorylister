@@ -144,7 +144,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
 
     <!-- READMNE start -->
     <?php
-    if ($md_text != "") {
+    if ($readme_html != "") {
         // 多行字符串开始
         $readme_top = '
                     <div class="container readme-background" id="readmeTop">
@@ -159,9 +159,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
                         </div>
                         <div class="readme" id="readme">
                         ';
-        echo $readme_top;
-        echo $readme_html;
-        echo "</div>", "</div>";
+        echo $readme_top . $readme_html . "</div></div>";
     }
     ?>
     <!-- READMNE end -->

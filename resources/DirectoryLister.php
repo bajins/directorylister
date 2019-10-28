@@ -447,114 +447,32 @@ class DirectoryLister
 
 
     /**
-     * 获取README目录
-     * 
-     * @return string config  路径
-     * @access public
-     */
-    public function getReadmePath()
-    {
-        $md_path_all = $this->getListedPath();
-        $suffix_array = explode('.', $_SERVER['HTTP_HOST']);
-        $suffix = end($suffix_array);
-        $md_path = explode($suffix, $md_path_all);
-
-        return $md_path;
-    }
-
-
-    /**
-     * 获取README未转换的Text内容
+     * 获取README内容
      * 
      * @return string config  配置值
      * @access public
      */
-    public function getMarkdownText()
-    {
-        $md_path = $this->getReadmePath();
-        if ($md_path[1] == "") {
-            return "";
-        }
-        $md_path_last = substr($md_path[1], -1);
-        if ($md_path_last != "/") {
-            $md_file = "." . $md_path[1] . "/README.md";
-        } else {
-            $md_file = "." . $md_path[1] . "README.md";
-        }
-        if (file_exists($md_file)) {
-            return file_get_contents($md_file);
-        }
-        return "";
-    }
-
-    /**
-     * 获取README.md转换为HTML的文本内容
-     * 
-     * @return string config   html内容
-     * @access public
-     */
-    public function getMarkdownHtml()
-    {
-        $md_text = $this->getMarkdownText();
-        if ($md_text != "") {
-            // https://github.com/erusev/parsedown
-            $Parsedown = new Parsedown();
-            return $Parsedown->text($md_text);
-        }
-        return "";
-    }
-
-
-
-    /**
-     * 获取README.html的文本内容
-     * 
-     * @return string config  html内容
-     * @access public
-     */
-    public function getReadmeHtml()
-    {
-        $md_path = $this->getReadmePath();
-        if ($md_path[1] == "") {
-            return "";
-        }
-        $md_path_last = substr($md_path[1], -1);
-
-        if ($md_path_last != "/") {
-            $md_file = "." . $md_path[1] . "/README.html";
-        } else {
-            $md_file = "." . $md_path[1] . "README.html";
-        }
-        if (file_exists($md_file)) {
-            return file_get_contents($md_file);
-        }
-        return "";
-    }
-
-
-    /**
-     * 根据config文件中的readme_mode的值解析README文档文件
-     * 
-     * @return string config  html内容
-     * @access public
-     */
     public function getReadme()
     {
+        // 获取当前目录
+        $md_path = $this->getListedPath();
+        if ($md_path == "") {
+            $md_path = "./";
+        }
+        // 获取config文件中的readme_mode的解析模式
         $readme_mode = $this->getConfig("readme_mode");
         // 如果配置为空，默认使用Markdown方式
-        if ($readme_mode == "") {
-            return $this->getMarkdownHtml();
+        if ($readme_mode == "" || strtoupper($readme_mode) == "MD") {
+            $md_path =  $md_path . "/README.md";
+            // https://github.com/erusev/parsedown
+            $Parsedown = new Parsedown();
+            return $Parsedown->text(file_get_contents($md_path));
+        } else {
+            $md_path =  $md_path . "/README.html";
+            return file_get_contents($md_path);
         }
-        // 字符串转大写
-        $readme_mode = strtoupper($readme_mode);
-        $this->setSystemMessage("info", $readme_mode);
-        // 如果为Markdown
-        if ($readme_mode == "MD") {
-            return $this->getMarkdownHtml();
-        }
-        return  $this->getReadmeHtml();
+        return "";
     }
-
 
 
     /**
