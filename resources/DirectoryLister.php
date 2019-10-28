@@ -466,9 +466,15 @@ class DirectoryLister
             $md_path =  $md_path . "/README.md";
             // https://github.com/erusev/parsedown
             $Parsedown = new Parsedown();
+            if (!file_exists($md_path)) {
+                return "";
+            }
             return $Parsedown->text(file_get_contents($md_path));
         } else {
             $md_path =  $md_path . "/README.html";
+            if (!file_exists($md_path)) {
+                return "";
+            }
             return file_get_contents($md_path);
         }
         return "";
