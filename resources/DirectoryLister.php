@@ -17,7 +17,6 @@ require_once('Parsedown.php');
  */
 class DirectoryLister
 {
-
     // 定义应用程序版本
     const VERSION = '2.6.1';
 
@@ -36,7 +35,6 @@ class DirectoryLister
      */
     public function __construct()
     {
-
         // 设置class目录常量
         if (!defined('__DIR__')) {
             define('__DIR__', dirname(__FILE__));
@@ -66,9 +64,9 @@ class DirectoryLister
     }
 
     /**
-     * If it is allowed to zip whole directories
+     * 如果允许压缩整个目录
      *
-     * @param string $directory Relative path of directory to list
+     * @param string $directory 列出目录的相对路径
      * @return true or false
      * @access public
      */
@@ -90,7 +88,6 @@ class DirectoryLister
      */
     public function zipDirectory($directory)
     {
-
         if ($this->_config['zip_dirs']) {
 
             // 清理目录路径
@@ -160,7 +157,6 @@ class DirectoryLister
      */
     public function listDirectory($directory)
     {
-
         // 设置目录，给_directory赋值为$directory
         $directory = $this->setDirectoryPath($directory);
 
@@ -170,10 +166,7 @@ class DirectoryLister
         }
 
         // 获取目录数组
-        $directoryArray = $this->_readDirectory($directory);
-
-        // 返回数组
-        return $directoryArray;
+        return $this->_readDirectory($directory);
     }
 
 
@@ -186,7 +179,6 @@ class DirectoryLister
      */
     public function listBreadcrumbs($directory = null)
     {
-
         // 如果留空则设置目录变量
         if ($directory === null) {
             $directory = $this->_directory;
@@ -227,8 +219,6 @@ class DirectoryLister
                 );
             }
         }
-
-        // 返回breadcrumb数组
         return $breadcrumbsArray;
     }
 
@@ -242,7 +232,6 @@ class DirectoryLister
      */
     public function containsIndex($dirPath)
     {
-
         // 检查目录是否包含索引文件
         foreach ($this->_config['index_files'] as $indexFile) {
 
@@ -251,7 +240,6 @@ class DirectoryLister
                 return true;
             }
         }
-
         return false;
     }
 
@@ -264,7 +252,6 @@ class DirectoryLister
      */
     public function getListedFullPath()
     {
-
         // 如果当前目录为根目录
         if ($this->_directory == '.') {
             $path = $this->_appURL;
@@ -282,7 +269,6 @@ class DirectoryLister
      */
     public function getListedPath()
     {
-
         // 如果当前目录为根目录
         if ($this->_directory == '.') {
             $path = "";
@@ -301,7 +287,6 @@ class DirectoryLister
      */
     public function getThemeName()
     {
-        // Return the theme name
         return $this->_config['theme_name'];
     }
 
@@ -319,33 +304,32 @@ class DirectoryLister
 
 
     /**
-     * Returns the path to the chosen theme directory
+     * 返回所选主题目录的路径
      *
-     * @param bool $absolute Whether or not the path returned is absolute (default = false).
+     * @param bool $absolute 返回的路径是否为绝对路径（默认为false）。
      * @return string Path to theme
      * @access public
      */
     public function getThemePath($absolute = false)
     {
         if ($absolute) {
-            // Set the theme path
+            // 设置主题路径
             $themePath = $this->_appDir . '/themes/' . $this->_themeName;
         } else {
-            // Get relative path to application dir
+            // 获取应用程序目录的相对路径
             $realtivePath = $this->_getRelativePath(getcwd(), $this->_appDir);
 
-            // Set the theme path
+            // 设置主题路径
             $themePath = $realtivePath . '/themes/' . $this->_themeName;
         }
-
         return $themePath;
     }
 
 
     /**
-     * Get an array of error messages or false when empty
+     * 获取错误消息数组；如果为空，则返回false
      *
-     * @return array|bool Array of error messages or false
+     * @return array|bool 错误消息数组或false
      * @access public
      */
     public function getSystemMessages()
@@ -359,15 +343,14 @@ class DirectoryLister
 
 
     /**
-     * Returns string of file size in human-readable format
+     * 以可读格式返回文件大小的字符串
      *
-     * @param  string $filePath Path to file
+     * @param  string $filePath 文件路径
      * @return string Human-readable file size
      * @access public
      */
     function getFileSize($filePath)
     {
-
         // 获取文件大小
         $bytes = filesize($filePath);
 
@@ -378,14 +361,12 @@ class DirectoryLister
         $factor = floor((strlen($bytes) - 1) / 3);
 
         // 计算文件大小
-        $fileSize = sprintf('%.2f', $bytes / pow(1024, $factor)) . $sizes[$factor];
-
-        return $fileSize;
+        return sprintf('%.2f', $bytes / pow(1024, $factor)) . $sizes[$factor];
     }
 
 
     /**
-     * Returns array of file hash values
+     * 返回文件哈希值的数组
      *
      * @param  string $filePath Path to file
      * @return array Array of file hashes
@@ -393,42 +374,35 @@ class DirectoryLister
      */
     public function getFileHash($filePath)
     {
-
-        // Placeholder array
+        // 占位符数组
         $hashArray = array();
 
-        // Verify file path exists and is a directory
+        // 验证文件路径是否存在并且是目录
         if (!file_exists($filePath)) {
             return json_encode($hashArray);
         }
 
-        // Prevent access to hidden files
+        // 禁止访问隐藏文件
         if ($this->_isHidden($filePath)) {
             return json_encode($hashArray);
         }
-
-        // Prevent access to parent folders
+        // 禁止访问父文件夹
         if (
             strpos($filePath, '<') !== false || strpos($filePath, '>') !== false
             || strpos($filePath, '..') !== false || strpos($filePath, '/') === 0
         ) {
             return json_encode($hashArray);
         }
-
-        // Prevent hashing if file is too big
+        // 如果文件太大，防止散列
         if (filesize($filePath) > $this->_config['hash_size_limit']) {
-
-            // Notify user that file is too large
+            // 通知用户文件太大
             $hashArray['md5']  = '[ 文件大小超过阈值 ]';
             $hashArray['sha1'] = '[ 文件大小超过阈值 ]';
         } else {
-
-            // Generate file hashes
+            // 生成文件哈希
             $hashArray['md5']  = hash_file('md5', $filePath);
             $hashArray['sha1'] = hash_file('sha1', $filePath);
         }
-
-        // Return the data
         return $hashArray;
     }
 
@@ -442,7 +416,6 @@ class DirectoryLister
      */
     public function setDirectoryPath($path = null)
     {
-
         // 设置目录全局变量，验证并返回目录路径
         $this->_directory = $this->_setDirectoryPath($path);
 
@@ -541,7 +514,6 @@ class DirectoryLister
      */
     public function getReadmeHtml()
     {
-
         $md_path = $this->getReadmePath();
         if ($md_path[1] == "") {
             return "";
@@ -575,6 +547,7 @@ class DirectoryLister
         }
         // 字符串转大写
         $readme_mode = strtoupper($readme_mode);
+        $this->setSystemMessage("info", $readme_mode);
         // 如果为Markdown
         if ($readme_mode == "MD") {
             return $this->getMarkdownHtml();
@@ -594,7 +567,6 @@ class DirectoryLister
      */
     public function setSystemMessage($type, $text)
     {
-
         // 创建空消息数组（如果它尚不存在）
         if (isset($this->_systemMessage) && !is_array($this->_systemMessage)) {
             $this->_systemMessage = array();
@@ -605,7 +577,6 @@ class DirectoryLister
             'type'  => $type,
             'text'  => $text
         );
-
         return true;
     }
 
@@ -619,7 +590,6 @@ class DirectoryLister
      */
     protected function _setDirectoryPath($dir)
     {
-
         // 检查一个空变量
         if (empty($dir) || $dir == '.') {
             return '.';
@@ -668,8 +638,6 @@ class DirectoryLister
             // 应该停止所有URL包装器（感谢Hexatex）
             $directoryPath = $dir;
         }
-
-        // Return
         return $directoryPath;
     }
 
@@ -685,7 +653,6 @@ class DirectoryLister
      */
     protected function _readDirectory($directory, $sort = 'natcase')
     {
-
         // 初始化数组
         $directoryArray = array();
 
@@ -790,32 +757,28 @@ class DirectoryLister
                 );
             }
         }
-
         // 排序数组
         $reverseSort = in_array($this->_directory, $this->_config['reverse_sort']);
-        $sortedArray = $this->_arraySort($directoryArray, $this->_config['list_sort_order'], $reverseSort);
-
-        // 返回数组
-        return $sortedArray;
+        return $this->_arraySort($directoryArray, $this->_config['list_sort_order'], $reverseSort);;
     }
 
 
     /**
-     * Sorts an array by the provided sort method.
+     * 通过提供的sort方法对数组进行排序。
      *
-     * @param array $array Array to be sorted
-     * @param string $sortMethod Sorting method (acceptable inputs: natsort, natcasesort, etc.)
-     * @param boolen $reverse Reverse the sorted array order if true (default = false)
+     * @param array $array 要排序的数组
+     * @param string $sortMethod 排序方法（可接受的输入：natsort，natcasesort等）
+     * @param boolen $reverse 如果为true，则反转排序的数组顺序（默认= false）
      * @return array
      * @access protected
      */
     protected function _arraySort($array, $sortMethod, $reverse = false)
     {
-        // Create empty arrays
+        // 创建空数组
         $sortedArray = array();
         $finalArray  = array();
 
-        // Create new array of just the keys and sort it
+        // 创建仅键的新数组并对其进行排序
         $keys = array_keys($array);
 
         switch ($sortMethod) {
@@ -842,7 +805,7 @@ class DirectoryLister
                 break;
         }
 
-        // Loop through the sorted values and move over the data
+        // 遍历排序的值并移至数据上
         if ($this->_config['list_folders_first']) {
 
             foreach ($keys as $key) {
@@ -893,23 +856,20 @@ class DirectoryLister
                 $finalArray[$key] = $value;
             }
         }
-
-        // Return sorted array
         return $finalArray;
     }
 
 
     /**
-     * Determines if a file is specified as hidden
+     * 确定文件是否指定为隐藏
      *
-     * @param string $filePath Path to file to be checked if hidden
-     * @return boolean Returns true if file is in hidden array, false if not
+     * @param string $filePath 隐藏文件检查路径
+     * @return boolean Returns 如果文件位于隐藏数组中，则为true；否则为false
      * @access protected
      */
     protected function _isHidden($filePath)
     {
-
-        // Add dot files to hidden files array
+        // 将点文件添加到隐藏文件数组
         if ($this->_config['hide_dot_files']) {
 
             $this->_config['hidden_files'] = array_merge(
@@ -918,7 +878,7 @@ class DirectoryLister
             );
         }
 
-        // Compare path array to all hidden file paths
+        // 比较路径数组与所有隐藏文件的路径
         foreach ($this->_config['hidden_files'] as $hiddenPath) {
 
             if (fnmatch($hiddenPath, $filePath)) {
@@ -926,7 +886,6 @@ class DirectoryLister
                 return true;
             }
         }
-
         return false;
     }
 
@@ -939,7 +898,6 @@ class DirectoryLister
      */
     protected function _getAppUrl()
     {
-
         // 获取服务器协议
         if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
             $protocol = 'https://';
@@ -977,10 +935,8 @@ class DirectoryLister
         if (substr($path, -1) != '/') {
             $path = $path . '/';
         }
-
-        // 建立应用程式网址
-        $appUrl = $protocol . $host . $path;
-        return $appUrl;
+        // 组成网址
+        return $protocol . $host . $path;
     }
 
 
@@ -994,7 +950,6 @@ class DirectoryLister
      */
     protected function _getRelativePath($fromPath, $toPath)
     {
-
         // 定义操作系统特定的目录分隔符
         if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
@@ -1058,9 +1013,6 @@ class DirectoryLister
         }
 
         // 设置相对缩略图目录路径
-        $relativePath = implode('/', $diffArray);
-
-        // 返回相对路径
-        return $relativePath;
+        return implode('/', $diffArray);
     }
 }

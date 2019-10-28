@@ -22,14 +22,12 @@
 
 - [修改网站标题为统一在配置文件中设置](https://github.com/woytu/DirectoryLister/commit/0fab9eae60df0926a06a5859f4d528b859b8be4c)
 
-- 修改[`README.md`支持Markdown语法](https://github.com/woytu/DirectoryLister/blob/68c64d9a95201d1460607f3f85855dcd303fecf5/resources/DirectoryLister.php#L460-L517)，如果不需要Markdown语法版本，请看分支[README-HTML](https://github.com/woytu/DirectoryLister/tree/README-HTML)
-
 - 添加面包屑导航栏
 
 - 添加配置`readme_mode`（README文档文件的解析模式：html、md）
 
 
- 
+
 ![新旧式样手机效果对比](/sample-graph.png)
 
 
