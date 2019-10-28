@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <?php
 header("Content-type: text/html; charset=utf-8");
-$config = $lister->getConfig('web_title');
-$md_path_all = $lister->getListedPath();
+// 网站名称
+$web_title = $lister->getConfig('web_title');
+// 当前路径
+$listed_path = $lister->getListedPath();
 $md_text = $lister->getMarkdownText();
 $md_html = $lister->getMarkdownHtml();
-
+// 面包屑导航
+$breadcrumbs = $lister->listBreadcrumbs();
 ?>
 <html lang="zh-CN">
 
 <head>
-    <title>
-        <?php echo $config; ?>
-        <?php echo $md_path_all; ?>
-    </title>
+    <!-- 网页标题 -->
+    <?php if ($listed_path != "") : ?>
+        <title><?php echo $web_title . " | " . $listed_path; ?></title>
+    <?php else : ?>
+        <title><?php echo $web_title; ?></title>
+    <?php endif; ?>
+
     <!-- 网站LOGO -->
     <link rel="shortcut icon" href="resources/themes/bootstrap/img/folder.png" />
     <!-- CSS基本库 -->
@@ -56,15 +62,39 @@ $md_html = $lister->getMarkdownHtml();
             <!-- 顶部公告栏 end -->
         </div>
     </div>
-    <div class="page-content container" id="container_page">
+
+    <div class="page-content container">
+        <!-- 面包屑导航栏 start -->
+        <nav aria-label="breadcrumb" class="d-none d-md-block d-md-none">
+            <ol class="breadcrumb">
+                <?php foreach ($breadcrumbs as $breadcrumb) : ?>
+                    <?php if ($breadcrumb != end($breadcrumbs)) : ?>
+                        <li class="breadcrumb-item">
+                            <a href="<?php echo $breadcrumb['link']; ?>">
+                                <?php if ($breadcrumb['text'] == $web_title) : ?>
+                                    <i class="fa fa-home"></i>
+                                <?php endif; ?>
+                                <?php echo $breadcrumb['text']; ?>
+                            </a>
+                        </li>
+                    <?php else : ?>
+                        <li class="breadcrumb-item active">
+                            <?php echo $breadcrumb['text']; ?>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ol>
+        </nav>
+        <!-- 面包屑导航栏 end -->
+
         <!-- 系统错误消息  -->
         <?php if ($lister->getSystemMessages()) : ?>
-        <?php foreach ($lister->getSystemMessages() as $message) : ?>
-        <div class="alert alert-<?php echo $message['type']; ?>">
-            <?php echo $message['text']; ?>
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-        </div>
-        <?php endforeach; ?>
+            <?php foreach ($lister->getSystemMessages() as $message) : ?>
+                <div class="alert alert-<?php echo $message['type']; ?>">
+                    <?php echo $message['text']; ?>
+                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                </div>
+            <?php endforeach; ?>
         <?php endif; ?>
 
         <!-- content -->
@@ -77,30 +107,30 @@ $md_html = $lister->getMarkdownHtml();
         </div>
         <ul id="directory-listing" class="nav nav-pills nav-stacked">
             <?php foreach ($dirArray as $name => $fileInfo) : ?>
-            <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
-                <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
-                    <div class="row">
-                        <span class="file-name col-md-7 col-sm-6 col-xs-9">
-                            <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
-                            <?php echo $name; ?>
-                        </span>
-                        <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
-                            <?php echo $fileInfo['file_size']; ?>
-                        </span>
-                        <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
-                            <?php echo $fileInfo['mod_time']; ?>
-                        </span>
-                    </div>
-                </a>
-                <?php if (is_file($fileInfo['file_path'])) : ?>
-                <?php else : ?>
-                <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
-                <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
-                    <i class="fa fa-external-link"></i>
-                </a>
-                <?php endif; ?>
-                <?php endif; ?>
-            </li>
+                <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
+                    <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
+                        <div class="row">
+                            <span class="file-name col-md-7 col-sm-6 col-xs-9">
+                                <i class="fa <?php echo $fileInfo['icon_class']; ?> fa-fw"></i>
+                                <?php echo $name; ?>
+                            </span>
+                            <span class="file-size col-md-2 col-sm-2 col-xs-3 text-right">
+                                <?php echo $fileInfo['file_size']; ?>
+                            </span>
+                            <span class="file-modified col-md-3 col-sm-4 hidden-xs text-right">
+                                <?php echo $fileInfo['mod_time']; ?>
+                            </span>
+                        </div>
+                    </a>
+                    <?php if (is_file($fileInfo['file_path'])) : ?>
+                    <?php else : ?>
+                        <?php if ($lister->containsIndex($fileInfo['file_path'])) : ?>
+                            <a href="<?php echo $fileInfo['file_path']; ?>" class="web-link-button" <?php if ($lister->externalLinksNewWindow()) : ?>target="_blank" <?php endif; ?>>
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -175,12 +205,12 @@ $md_html = $lister->getMarkdownHtml();
                 }, 500);
             }
             // PHP赋值给js变量
-            // var mdText="<?php //echo $md_text; ?>";
+            // var mdText="<?php //echo $md_text; 
+                            ?>";
             // var md = window.markdownit();
             // var result = md.render(mdText);
             // $("#readme").html(result);
         }
-        
     </script>
 
     <!-- Valine https://valine.js.org/ -->

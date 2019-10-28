@@ -45,7 +45,7 @@ class DirectoryLister
         // 设置应用程序目录
         $this->_appDir = __DIR__;
 
-        // 构建应用程序URL
+        // 构建应用程序URL（主机域名地址）
         $this->_appURL = $this->_getAppUrl();
 
         // 加载配置文件
@@ -93,7 +93,7 @@ class DirectoryLister
 
         if ($this->_config['zip_dirs']) {
 
-            // Cleanup directory path
+            // 清理目录路径
             $directory = $this->setDirectoryPath($directory);
 
             if ($directory != '.' && $this->_isHidden($directory)) {
@@ -106,22 +106,22 @@ class DirectoryLister
                 $filename_no_ext = $this->_config['web_title'];
             }
 
-            // We deliver a zip file
+            // 我们提供一个zip文件
             header('Content-Type: archive/zip');
 
             // 浏览器的文件名保存zip文件
             header("Content-Disposition: attachment; filename=\"$filename_no_ext.zip\"");
 
-            //change directory so the zip file doesnt have a tree structure in it.
+            // 更改目录，以便该zip文件中没有树结构。
             chdir($directory);
 
-            // TODO: Probably we have to parse exclude list more carefully
+            // 待办事项：可能我们必须更仔细地分析排除列表
             $exclude_list = implode(' ', array_merge($this->_config['hidden_files'], array('index.php')));
             $exclude_list = str_replace("*", "\*", $exclude_list);
 
             if ($this->_config['zip_stream']) {
 
-                // zip the stuff (dir and all in there) into the streamed zip file
+                // 将内容（dir和所有内容）压缩到流式zip文件中
                 $stream = popen('/usr/bin/zip -' . $this->_config['zip_compression_level'] . ' -r -q - * -x ' . $exclude_list, 'r');
 
                 if ($stream) {
@@ -130,21 +130,21 @@ class DirectoryLister
                 }
             } else {
 
-                // get a tmp name for the .zip
+                // 获取.zip的tmp名称
                 $tmp_zip = tempnam('tmp', 'tempzip') . '.zip';
 
-                // zip the stuff (dir and all in there) into the tmp_zip file
+                // 将东西（dir和所有内容）压缩到tmp_zip文件中
                 exec('zip -' . $this->_config['zip_compression_level'] . ' -r ' . $tmp_zip . ' * -x ' . $exclude_list);
 
-                // calc the length of the zip. it is needed for the progress bar of the browser
+                // 计算拉链的长度。浏览器的进度条需要它
                 $filesize = filesize($tmp_zip);
                 header("Content-Length: $filesize");
 
-                // deliver the zip file
+                // 传送zip文件
                 $fp = fopen($tmp_zip, 'r');
                 echo fpassthru($fp);
 
-                // clean up the tmp zip file
+                // 清理tmp zip文件
                 unlink($tmp_zip);
             }
         }
@@ -178,10 +178,10 @@ class DirectoryLister
 
 
     /**
-     * Parses and returns an array of breadcrumbs
+     * 解析并返回面包屑导航数组
      *
-     * @param string $directory Path to be breadcrumbified
-     * @return array Array of breadcrumbs
+     * @param string $directory 面包屑的路径
+     * @return array 面包屑数组
      * @access public
      */
     public function listBreadcrumbs($directory = null)
@@ -201,7 +201,7 @@ class DirectoryLister
             'text' => $this->_config['web_title']
         );
 
-        // Generate breadcrumbs
+        // 生成面包屑
         foreach ($dirArray as $key => $dir) {
 
             if ($dir != '.') {
@@ -234,10 +234,10 @@ class DirectoryLister
 
 
     /**
-     * Determines if a directory contains an index file
+     * 确定目录是否包含索引文件
      *
-     * @param string $dirPath Path to directory to be checked for an index
-     * @return boolean Returns true if directory contains a valid index file, false if not
+     * @param string $dirPath 要检查索引的目录路径
+     * @return boolean Returns 如果目录包含有效的索引文件，则为true；否则为false
      * @access public
      */
     public function containsIndex($dirPath)
@@ -257,7 +257,25 @@ class DirectoryLister
 
 
     /**
-     * 获取列出的目录的路径
+     * 获取列出目录的全（绝对）路径
+     *
+     * @return string 列出目录的路径
+     * @access public
+     */
+    public function getListedFullPath()
+    {
+
+        // 如果当前目录为根目录
+        if ($this->_directory == '.') {
+            $path = $this->_appURL;
+        } else {
+            $path = $this->_appURL . $this->_directory;
+        }
+        return $path;
+    }
+
+    /**
+     * 获取列出目录的路径（不包含网站主机域名地址）
      *
      * @return string 列出目录的路径
      * @access public
@@ -265,14 +283,12 @@ class DirectoryLister
     public function getListedPath()
     {
 
-        // Build the path
+        // 如果当前目录为根目录
         if ($this->_directory == '.') {
-            $path = $this->_appURL;
+            $path = "";
         } else {
-            $path = $this->_appURL . $this->_directory;
+            $path = $this->_directory;
         }
-
-        // Return the path
         return $path;
     }
 
@@ -655,103 +671,99 @@ class DirectoryLister
         // 从目录中读取文件/文件夹
         foreach ($files as $file) {
 
-            if ($file != '.') {
+            if ($file == '.') {
+                continue;
+            }
+            // 如果我们在根目录中，请不要检查父目录
+            if ($this->_directory == '.' && $file == '..') {
 
-                // 获取文件相对路径
-                $relativePath = $directory . '/' . $file;
+                continue;
+            }
+            // 获取文件相对路径
+            $relativePath = $directory . '/' . $file;
 
-                if (substr($relativePath, 0, 2) == './') {
-                    $relativePath = substr($relativePath, 2);
-                }
+            if (substr($relativePath, 0, 2) == './') {
+                $relativePath = substr($relativePath, 2);
+            }
 
-                // 如果我们在根目录中，请不要检查父目录
-                if ($this->_directory == '.' && $file == '..') {
 
-                    continue;
+            // 获取文件绝对路径
+            $realPath = realpath($relativePath);
+
+            // 按扩展名确定文件类型
+            if (is_dir($realPath)) {
+                $iconClass = 'fa-folder';
+                $sort = 1;
+            } else {
+                // 获取文件扩展名
+                // pathinfo() 函数以数组的形式返回文件路径的信息
+                // strtolower() 函数把字符串转换为小写。
+                $fileExt = strtolower(pathinfo($realPath, PATHINFO_EXTENSION));
+
+                // isset() 判断一个变量是否已经声明
+                if (isset($this->_fileTypes[$fileExt])) {
+                    $iconClass = $this->_fileTypes[$fileExt];
                 } else {
-
-                    // 获取文件绝对路径
-                    $realPath = realpath($relativePath);
-
-                    // 按扩展名确定文件类型
-                    if (is_dir($realPath)) {
-                        $iconClass = 'fa-folder';
-                        $sort = 1;
-                    } else {
-                        // 获取文件扩展名
-                        // pathinfo() 函数以数组的形式返回文件路径的信息
-                        // strtolower() 函数把字符串转换为小写。
-                        $fileExt = strtolower(pathinfo($realPath, PATHINFO_EXTENSION));
-
-                        // isset() 判断一个变量是否已经声明
-                        if (isset($this->_fileTypes[$fileExt])) {
-                            $iconClass = $this->_fileTypes[$fileExt];
-                        } else {
-                            $iconClass = $this->_fileTypes['blank'];
-                        }
-
-                        $sort = 2;
-                    }
+                    $iconClass = $this->_fileTypes['blank'];
                 }
 
-                if ($file == '..') {
+                $sort = 2;
+            }
 
-                    if ($this->_directory != '.') {
-                        // 获取父目录路径
-                        $pathArray = explode('/', $relativePath);
-                        // 销毁单个数组元素
-                        unset($pathArray[count($pathArray) - 1]);
-                        unset($pathArray[count($pathArray) - 1]);
-                        // implode() 把数组元素按/组合为字符串
-                        $directoryPath = implode('/', $pathArray);
 
-                        if (!empty($directoryPath)) {
-                            // 转码并拼接url
-                            $directoryPath = '?dir=' . rawurlencode($directoryPath);
-                        }
+            if ($file == '..' && ($this->_directory != '.')) {
+                // 获取父目录路径
+                $pathArray = explode('/', $relativePath);
+                // 销毁单个数组元素
+                unset($pathArray[count($pathArray) - 1]);
+                unset($pathArray[count($pathArray) - 1]);
+                // implode() 把数组元素按/组合为字符串
+                $directoryPath = implode('/', $pathArray);
 
-                        // 将文件信息添加到数组中
-                        $directoryArray['..'] = array(
-                            'file_path'  => $this->_appURL . $directoryPath,
-                            'url_path'   => $this->_appURL . $directoryPath,
-                            'file_size'  => '-',
-                            'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
-                            'icon_class' => 'fa-level-up',
-                            'sort'       => 0
-                        );
-                    }
-                } elseif (!$this->_isHidden($relativePath)) {
-
-                    // 将所有非隐藏文件添加到数组中
-                    if ($this->_directory != '.' || $file != 'index.php') {
-
-                        // 构建文件路径
-                        // implode() 把数组元素按/组合为字符串
-                        // array_map() 函数作用到数组中的每个值上，并返回带有新值的数组
-                        // explode() 函数把字符串打散为数组
-                        $urlPath = implode('/', array_map('rawurlencode', explode('/', $relativePath)));
-
-                        if (is_dir($relativePath)) {
-                            $urlPath = '?dir=' . $urlPath;
-                        } else {
-                            $urlPath = $urlPath;
-                        }
-
-                        // 由larry将信息添加到主数组中
-                        preg_match('/\/([^\/]*)$/', $relativePath, $matches);
-                        // isset() 判断一个变量是否已经声明
-                        $pathname = isset($matches[1]) ? $matches[1] : $relativePath;
-                        //$directoryArray[pathinfo($relativePath, PATHINFO_BASENAME)] = array(
-                        $directoryArray[$pathname] = array(
-                            'file_path'  => $relativePath,
-                            'url_path'   => $urlPath,
-                            'file_size'  => is_dir($realPath) ? '-' : $this->getFileSize($realPath),
-                            'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
-                            'icon_class' => $iconClass,
-                            'sort'       => $sort
-                        );
-                    }
+                if (!empty($directoryPath)) {
+                    // 转码并拼接url
+                    $directoryPath = '?dir=' . rawurlencode($directoryPath);
                 }
+
+                // 将文件信息添加到数组中
+                $directoryArray['返回上一层'] = array(
+                    'file_path'  => $this->_appURL . $directoryPath,
+                    'url_path'   => $this->_appURL . $directoryPath,
+                    'file_size'  => '-',
+                    'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
+                    'icon_class' => 'fa-level-up',
+                    'sort'       => 0
+                );
+            } elseif
+
+            // 将所有非隐藏文件添加到数组中
+            (!$this->_isHidden($relativePath) && ($this->_directory != '.' || $file != 'index.php')) {
+
+                // 构建文件路径
+                // implode() 把数组元素按/组合为字符串
+                // array_map() 函数作用到数组中的每个值上，并返回带有新值的数组
+                // explode() 函数把字符串打散为数组
+                $urlPath = implode('/', array_map('rawurlencode', explode('/', $relativePath)));
+
+                if (is_dir($relativePath)) {
+                    $urlPath = '?dir=' . $urlPath;
+                } else {
+                    $urlPath = $urlPath;
+                }
+
+                // 由larry将信息添加到主数组中
+                preg_match('/\/([^\/]*)$/', $relativePath, $matches);
+                // isset() 判断一个变量是否已经声明
+                $pathname = isset($matches[1]) ? $matches[1] : $relativePath;
+                //$directoryArray[pathinfo($relativePath, PATHINFO_BASENAME)] = array(
+                $directoryArray[$pathname] = array(
+                    'file_path'  => $relativePath,
+                    'url_path'   => $urlPath,
+                    'file_size'  => is_dir($realPath) ? '-' : $this->getFileSize($realPath),
+                    'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
+                    'icon_class' => $iconClass,
+                    'sort'       => $sort
+                );
             }
         }
 
@@ -896,123 +908,135 @@ class DirectoryLister
 
 
     /**
-     * Builds the root application URL from server variables.
+     * 根据服务器变量构建根应用程序URL。
      *
-     * @return string The application URL
+     * @return string 这个应用的URL地址
      * @access protected
      */
     protected function _getAppUrl()
     {
 
-        // Get the server protocol
+        // 获取服务器协议
         if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
             $protocol = 'https://';
         } else {
             $protocol = 'http://';
         }
 
-        // Get the server hostname
+        // 获取服务器主机名
         $host = $_SERVER['HTTP_HOST'];
+        // 获取网页地址
+        // $_SERVER['PHP_SELF'];
+        // 获取网址参数
+        // $_SERVER["QUERY_STRING"];
+        // 获取用户代理
+        // $_SERVER['HTTP_REFERER'];
+        // 获取请求URL
+        //$_SERVER['REQUEST_URI'];
+        // 获取网址参数
+        //$_SERVER['QUERY_STRING'];
+        // 获取主机名称
+        //$_SERVER['SERVER_NAME'];
+        // 获取端口号
+        //$_SERVER["SERVER_PORT"];
 
-        // Get the URL path
+        // 获取URL路径
         $pathParts = pathinfo($_SERVER['PHP_SELF']);
         $path      = $pathParts['dirname'];
 
-        // Remove backslash from path (Windows fix)
+        // 从路径中删除反斜杠（Windows修复）
         if (substr($path, -1) == '\\') {
             $path = substr($path, 0, -1);
         }
 
-        // Ensure the path ends with a forward slash
+        // 确保路径以正斜杠结尾
         if (substr($path, -1) != '/') {
             $path = $path . '/';
         }
 
-        // Build the application URL
+        // 建立应用程式网址
         $appUrl = $protocol . $host . $path;
-
-        // Return the URL
         return $appUrl;
     }
 
 
     /**
-     * Compares two paths and returns the relative path from one to the other
+     * 比较两条路径并返回一条到另一条的相对路径
      *
-     * @param string $fromPath Starting path
-     * @param string $toPath Ending path
+     * @param string $fromPath 起始路径
+     * @param string $toPath 结束路径
      * @return string $relativePath Relative path from $fromPath to $toPath
      * @access protected
      */
     protected function _getRelativePath($fromPath, $toPath)
     {
 
-        // Define the OS specific directory separator
+        // 定义操作系统特定的目录分隔符
         if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
-        // Remove double slashes from path strings
+        // 从路径字符串中删除双斜杠
         $fromPath = str_replace(DS . DS, DS, $fromPath);
         $toPath = str_replace(DS . DS, DS, $toPath);
 
-        // Explode working dir and cache dir into arrays
+        // 分解工作目录并将目录缓存到数组中
         $fromPathArray = explode(DS, $fromPath);
         $toPathArray = explode(DS, $toPath);
 
-        // Remove last fromPath array element if it's empty
+        // 从空数组元素中删除最后一个（如果为空）
         $x = count($fromPathArray) - 1;
 
         if (!trim($fromPathArray[$x])) {
             array_pop($fromPathArray);
         }
 
-        // Remove last toPath array element if it's empty
+        // 删除最后一个toPath数组元素（如果为空）
         $x = count($toPathArray) - 1;
 
         if (!trim($toPathArray[$x])) {
             array_pop($toPathArray);
         }
 
-        // Get largest array count
+        // 获得最大的阵列数
         $arrayMax = max(count($fromPathArray), count($toPathArray));
 
-        // Set some default variables
+        // 设置一些默认变量
         $diffArray = array();
         $samePath = true;
         $key = 1;
 
-        // Generate array of the path differences
+        // 生成路径差异数组
         while ($key <= $arrayMax) {
 
-            // Get to path variable
+            // 到达路径变量
             $toPath = isset($toPathArray[$key]) ? $toPathArray[$key] : null;
 
-            // Get from path variable
+            // 从路径变量获取
             $fromPath = isset($fromPathArray[$key]) ? $fromPathArray[$key] : null;
 
             if ($toPath !== $fromPath || $samePath !== true) {
 
-                // Prepend '..' for every level up that must be traversed
+                // 对于必须遍历的每个级别，将".."作为前缀
                 if (isset($fromPathArray[$key])) {
                     array_unshift($diffArray, '..');
                 }
 
-                // Append directory name for every directory that must be traversed
+                // 为必须遍历的每个目录追加目录名称
                 if (isset($toPathArray[$key])) {
                     $diffArray[] = $toPathArray[$key];
                 }
 
-                // Directory paths have diverged
+                // 目录路径已分开
                 $samePath = false;
             }
 
-            // Increment key
+            // 增量键
             $key++;
         }
 
-        // Set the relative thumbnail directory path
+        // 设置相对缩略图目录路径
         $relativePath = implode('/', $diffArray);
 
-        // Return the relative path
+        // 返回相对路径
         return $relativePath;
     }
 }
