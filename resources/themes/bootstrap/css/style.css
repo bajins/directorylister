@@ -201,13 +201,13 @@ footer.container {
 
 .path-announcement a {
     color: #777;
-    border-bottom: solid 1px #999;
+    border-bottom: 1px solid #999;
 }
 
 .path-announcement a:focus,
 .path-announcement a:hover {
     color: #89b733;
-    border-bottom: solid 1px #555;
+    border-bottom: 1px solid #555;
 }
 
 .path-announcement i {
@@ -306,20 +306,20 @@ footer.container {
 .readme h1 {
     font-size: 26px;
     padding-bottom: 20px;
-    border-bottom: solid 1px #dadada;
+    border-bottom: 1px solid #dadada;
 }
 
 .readme h2 {
     font-size: 22px;
     padding-bottom: 10px;
-    border-bottom: solid 1px #dadada;
+    border-bottom: 1px solid #dadada;
 }
 
 .readme h3 {
     font-size: 18px;
     margin-top: 20px;
     padding-bottom: 5px;
-    border-bottom: solid 1px #dadada;
+    border-bottom: 1px solid #dadada;
 }
 
 .readme h4 {
@@ -361,7 +361,8 @@ footer.container {
 
 .readme blockquote::before {
     position: absolute;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    content: "\f10d";
     font-size: 16px;
     font-style: normal;
     font-weight: normal;
@@ -370,7 +371,6 @@ footer.container {
     color: #666;
     margin-top: 10px;
     margin-left: -39px;
-    content: "\f10d";
     transition: 0.3s;
 }
 
@@ -385,7 +385,9 @@ footer.container {
 
 .readme ul li::before {
     position: absolute;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f105";
     font-size: 16px;
     font-style: normal;
     font-weight: normal;
@@ -396,7 +398,6 @@ footer.container {
     margin-top: 10px;
     margin-left: -39px;
     padding-left: 20px;
-    content: "\f105";
     transition: 0.3s;
 }
 
@@ -415,8 +416,8 @@ color: #159e83;
 */
 
 .readme table {
-    border-top: solid 1px #ddd;
-    border-left: solid 1px #ddd;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
     margin-bottom: 16px;
     text-indent: 0;
     text-align: center;
@@ -441,8 +442,8 @@ color: #159e83;
 
 .readme table td,
 .readme table th {
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
     padding: 10px 15px;
 }
 
