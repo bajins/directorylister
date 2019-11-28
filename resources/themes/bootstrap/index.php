@@ -24,9 +24,9 @@ $breadcrumbs = $lister->listBreadcrumbs();
     <link rel="shortcut icon" href="resources/themes/bootstrap/img/folder.png" />
     <!-- CSS基本库 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/bootstrap.min.css" />
-    <!-- 网站图标CSS式样 从版本4升级到5 https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.min.css">
+    <!-- 网站图标CSS式样 从版本4升级到5 https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4 -->
+    <link rel="stylesheet" href="resources/themes/bootstrap/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="resources/themes/bootstrap/fontawesome/css/v4-shims.min.css">
     <!-- 网站主要式样 -->
     <link rel="stylesheet" href="resources/themes/bootstrap/css/style.css" />
     <!-- 代码高亮样式 -->

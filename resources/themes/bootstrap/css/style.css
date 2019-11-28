@@ -362,10 +362,10 @@ footer.container {
 .readme blockquote::before {
     position: absolute;
     font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: "\f10d";
     font-size: 16px;
     font-style: normal;
-    font-weight: normal;
     line-height: 0;
     -webkit-font-smoothing: antialiased;
     color: #666;
@@ -390,7 +390,6 @@ footer.container {
     content: "\f105";
     font-size: 16px;
     font-style: normal;
-    font-weight: normal;
     line-height: 0.5;
     -webkit-font-smoothing: antialiased;
     color: #222;
