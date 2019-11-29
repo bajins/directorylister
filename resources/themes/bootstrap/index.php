@@ -66,17 +66,16 @@ $breadcrumbs = $lister->listBreadcrumbs();
         <!-- 面包屑导航栏 start -->
         <nav aria-label="breadcrumb" class="d-none d-md-block d-md-none">
             <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <?php echo $web_title; ?>
+                    </a>
+                </li>
                 <?php foreach ($breadcrumbs as $breadcrumb) : ?>
-                    <?php /** 取第一个元素reset*/ ?>
-                    <?php if ($breadcrumb == reset($breadcrumbs)) : ?>
-                        <li class="breadcrumb-item">
-                            <a href="<?php echo $breadcrumb['link']; ?>">
-                                <i class="fa fa-home"></i>
-                                <?php echo $breadcrumb['text']; ?>
-                            </a>
-                        </li>
-                    <?php /** 取最后一个元素end*/ ?>
-                    <?php elseif ($breadcrumb == end($breadcrumbs)) : ?>
+                    <?php /** 取第一个元素reset*/ if ($breadcrumb == reset($breadcrumbs)) : ?>
+
+                    <?php /** 取最后一个元素end*/ elseif ($breadcrumb == end($breadcrumbs)) : ?>
                         <li class="breadcrumb-item active">
                             <?php echo $breadcrumb['text']; ?>
                         </li>
