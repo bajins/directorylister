@@ -67,25 +67,24 @@ $breadcrumbs = $lister->listBreadcrumbs();
         <nav aria-label="breadcrumb" class="d-none d-md-block d-md-none">
             <ol class="breadcrumb">
                 <?php foreach ($breadcrumbs as $breadcrumb) : ?>
-                    <?php if ($breadcrumb != end($breadcrumbs)) : ?>
+                    <?php /** 取第一个元素reset*/ ?>
+                    <?php if ($breadcrumb == reset($breadcrumbs)) : ?>
                         <li class="breadcrumb-item">
                             <a href="<?php echo $breadcrumb['link']; ?>">
-                                <?php if ($breadcrumb['text'] == $web_title) : ?>
-                                    <i class="fa fa-home"></i>
-                                <?php endif; ?>
-                                <?php echo $breadcrumb['text']; ?>
+                                <i class="fa fa-home"></i>
+                                <?php echo $breadcrumb['text'],reset($breadcrumbs); ?>
                             </a>
                         </li>
-                    <?php else : ?>
+                    <?php /** 取最后一个元素end*/ ?>
+                    <?php elseif ($breadcrumb == end($breadcrumbs)) : ?>
                         <li class="breadcrumb-item active">
-                            <?php if ($breadcrumb['text'] == $web_title) : ?>
-                                <a href="<?php echo $breadcrumb['link']; ?>">
-                                    <i class="fa fa-home"></i>
-                                    <?php echo $breadcrumb['text']; ?>
-                                </a>
-                            <?php else : ?>
+                            <?php echo $breadcrumb['text']; ?>
+                        </li>
+                    <?php else : ?>
+                        <li class="breadcrumb-item">
+                            <a href="<?php echo $breadcrumb['link']; ?>">
                                 <?php echo $breadcrumb['text']; ?>
-                            <?php endif; ?>
+                            </a>
                         </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
