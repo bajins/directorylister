@@ -72,7 +72,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
                         <li class="breadcrumb-item">
                             <a href="<?php echo $breadcrumb['link']; ?>">
                                 <i class="fa fa-home"></i>
-                                <?php echo $breadcrumb['text'],reset($breadcrumbs); ?>
+                                <?php echo $breadcrumb['text']; ?>
                             </a>
                         </li>
                     <?php /** 取最后一个元素end*/ ?>
