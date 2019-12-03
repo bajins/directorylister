@@ -51,7 +51,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
 </head>
 
 <body>
-    <div class="path-announcement navbar navbar-default navbar-fixed-top">
+    <header class="path-announcement navbar navbar-default navbar-fixed-top">
         <div class="path-announcement2 container">
             <!-- 顶部公告栏 start -->
             <p style="color:red">
@@ -60,7 +60,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
             </p>
             <!-- 顶部公告栏 end -->
         </div>
-    </div>
+    </header>
 
     <div class="page-content container">
         <!-- 面包屑导航栏 start -->
@@ -176,9 +176,8 @@ $breadcrumbs = $lister->listBreadcrumbs();
 
 
     <!-- footer start -->
-    <hr id="footer_hr" style="margin-bottom: 0;margin-top: 40px;" />
-    <footer class="container">
-        <div class="footer">
+    <footer>
+        <div class="footer container">
             <?php file_exists('footer.php') ? include('footer.php') : include($lister->getThemePath(true) . "/default_footer.php"); ?>
         </div>
     </footer>
@@ -207,8 +206,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
                 }, 500);
             }
             // PHP赋值给js变量
-            // var mdText="<?php //echo $md_text; 
-                            ?>";
+            // var mdText="<?php //echo $md_text; ?>";
             // var md = window.markdownit();
             // var result = md.render(mdText);
             // $("#readme").html(result);
