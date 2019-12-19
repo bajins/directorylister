@@ -192,6 +192,10 @@ $breadcrumbs = $lister->listBreadcrumbs();
         window.onresize = function() {
             anchorPositioning();
         }
+        // onhashchange 事件在当前 URL 的锚部分(以 '#' 号为开始) 发生改变时触发 。
+        window.onhashchange = function() {
+            anchorPositioning();
+        }
 
         function anchorPositioning() {
             // 获取URL中的锚点标签属性
