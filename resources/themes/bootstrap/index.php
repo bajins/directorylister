@@ -194,15 +194,13 @@ $breadcrumbs = $lister->listBreadcrumbs();
         }
 
         function anchorPositioning() {
-            // 获取整个 URL 为字符串。
-            var url = window.location.href;
-            // 判断URL中是否带#号
-            if (url.indexOf("#") != -1) {
-                var divId = url.split("#")[1];
-                // document.getElementById(divId).scrollIntoView(true);
-                // window.location.hash = divId;
+            // 获取URL中的锚点标签属性
+            var target = $(decodeURIComponent(location.hash));
+            // document.getElementById(location.hash).scrollIntoView(true);
+            // 判断锚点是否存在
+            if (target.length == 1) {
                 $('html,body').animate({
-                    scrollTop: $("#" + divId).offset().top - 50 + "px"
+                    scrollTop: target.offset().top - 50
                 }, 500);
             }
             // PHP赋值给js变量
