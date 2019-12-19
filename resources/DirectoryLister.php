@@ -2,6 +2,8 @@
 // https://github.com/erusev/parsedown
 // 导入Parsedown依赖
 require_once('Parsedown.php');
+require_once('ParsedownExtra.php');
+require_once('ParsedownExtraPlugin.php');
 /**
  * 一个简单的基于PHP的目录列表器，列出了内容
  * 目录及其所有子目录，并且允许轻松
@@ -464,11 +466,32 @@ class DirectoryLister
         // 如果配置为空，默认使用Markdown方式
         if ($readme_mode == "" || strtoupper($readme_mode) != "HTML") {
             $md_path =  $md_path . "/README.md";
-            // https://github.com/erusev/parsedown
-            $Parsedown = new Parsedown();
+
             if (!file_exists($md_path)) {
                 return "";
             }
+            // https://github.com/erusev/parsedown
+            // https://github.com/erusev/parsedown-extra
+            // https://github.com/tovic/parsedown-extra-plugin
+            $Parsedown = new ParsedownExtraPlugin();
+
+            $Parsedown->headerAttributes = function ($Text, $Attributes, &$Element, $Level) {
+                $Id = $Attributes['id'] ?? trim(
+                    preg_replace(['/[^a-z\d\x{4e00}-\x{9fa5}]+/u'], '-', strtolower($Text)),
+                    '-'
+                );
+                return ['id' => $Id];
+            };
+            $Parsedown->linkAttributes = function ($Text, $Attributes, &$Element, $Internal) {
+                $href = strtolower($Attributes['href']);
+                // https://www.chrisyue.com/the-fastest-way-to-implement-starts-with-in-php.html
+                if (!$Internal && strpos($href, "https") === 0 && strpos($href, "http") === 0) {
+                    return [
+                        'target' => '_blank'
+                    ];
+                }
+                return [];
+            };
             return $Parsedown->text(file_get_contents($md_path));
         } else {
             $md_path =  $md_path . "/README.html";

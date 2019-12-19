@@ -73,6 +73,27 @@ woytu Soft：https://www.woytu.com
 └ ......
 ```
 
+* [https://www.php.net/manual/zh](https://www.php.net/manual/zh)
+
+---
+
+* [https://github.com/erusev/parsedown](https://github.com/erusev/parsedown)
+
+* [https://github.com/erusev/parsedown-extra](https://github.com/erusev/parsedown-extra)
+
+* [https://github.com/taufik-nurrohman/parsedown-extra-plugin](https://github.com/taufik-nurrohman/parsedown-extra-plugin)
+
+* [https://github.com/mrgeneralgoo/typecho-markdown](https://github.com/mrgeneralgoo/typecho-markdown)
+
+---
+
+* [https://getcomposer.org](https://getcomposer.org)
+
+* [https://github.com/michelf/php-markdown](https://github.com/michelf/php-markdown)
+
+* [https://github.com/thephpleague/commonmark](https://github.com/thephpleague/commonmark)
+
+
 ## 注意事项：
 
 ### 不显示文件和目录
