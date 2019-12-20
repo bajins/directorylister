@@ -10,9 +10,14 @@
 
 - 添加对表格样式多样化的支持
 
-- 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`
+- 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`，或者点击标题前的锚点链接
 
-  > 示例链接：https://file.woytu.com/?dir=DeveloperTool#Xshell
+    1. [Markdown解析添加锚点](https://github.com/woytu/DirectoryLister/commit/1c14776e15a35a680ec02a95278abbb1777a950a)
+
+    2. [add 添加锚点可点击的a标签](https://github.com/woytu/DirectoryLister/commit/1d1f90220de2e948f0bba086786e33fb353f7189)
+
+  > 示例链接：https://www.woytu.com#readme
+
 
 - 化繁为简：去除顶部链接，如果需要顶部链接版本，请看分支[top-links](https://github.com/woytu/DirectoryLister/tree/top-links)
 
@@ -77,11 +82,7 @@ woytu Soft：https://www.woytu.com
 
 ---
 
-* [https://github.com/erusev/parsedown](https://github.com/erusev/parsedown)
-
-* [https://github.com/erusev/parsedown-extra](https://github.com/erusev/parsedown-extra)
-
-* [https://github.com/taufik-nurrohman/parsedown-extra-plugin](https://github.com/taufik-nurrohman/parsedown-extra-plugin)
+* [https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries](https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries)
 
 * [https://github.com/mrgeneralgoo/typecho-markdown](https://github.com/mrgeneralgoo/typecho-markdown)
 
