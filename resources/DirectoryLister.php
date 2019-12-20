@@ -485,7 +485,7 @@ class DirectoryLister
             $Parsedown->linkAttributes = function ($Text, $Attributes, &$Element, $Internal) {
                 $href = strtolower($Attributes['href']);
                 // https://www.chrisyue.com/the-fastest-way-to-implement-starts-with-in-php.html
-                if (!$Internal && strpos($href, "https") === 0 && strpos($href, "http") === 0) {
+                if (!$Internal && (strpos($href, "https://") === 0 || strpos($href, "http://") === 0)) {
                     return [
                         'target' => '_blank'
                     ];
