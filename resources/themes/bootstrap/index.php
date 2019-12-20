@@ -200,6 +200,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
         function anchorPositioning() {
             // 获取URL中的锚点标签属性
             var target = $(decodeURIComponent(location.hash));
+            // 让当前的元素滚动到浏览器窗口的可视区域内
             // document.getElementById(location.hash).scrollIntoView(true);
             // 判断锚点是否存在
             if (target.length == 1) {
@@ -213,6 +214,12 @@ $breadcrumbs = $lister->listBreadcrumbs();
             // var result = md.render(mdText);
             // $("#readme").html(result);
         }
+        // 点击锚点时跳转
+        $(".header-anchor").click(function() {
+            // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTop
+            var scrollTop = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+            document.body.scrollTop = document.documentElement.scrollTop = scrollTop - 50;
+        });
     </script>
 
     <!-- Valine https://valine.js.org/ -->
@@ -222,7 +229,7 @@ $breadcrumbs = $lister->listBreadcrumbs();
             el: '#vcomments',
             appId: 'm9S5QXsdju39LvMs8ooRRIiF-MdYXbMMI',
             appKey: 'UfBRjySkb4bjPiFuH0Pxe3a9'
-        })
+        });
 
         // 来必力 https://www.livere.com
         /*(function (d, s) {

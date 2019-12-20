@@ -290,6 +290,26 @@ footer {
     text-indent: 0;
 }
 
+.readme h1:hover .header-anchor,
+.readme h2:hover .header-anchor,
+.readme h3:hover .header-anchor,
+.readme h4:hover .header-anchor,
+.readme h5:hover .header-anchor,
+.readme h6:hover .header-anchor {
+    /* 锚点显示 */
+    opacity: 1;
+}
+
+.readme a.header-anchor {
+    font-size: .85em;
+    float: left;
+    margin-left: -.87em;
+    padding-right: .23em;
+    margin-top: .125em;
+    /* 锚点完全透明隐藏 */
+    opacity: 0;
+}
+
 .readme ul {
     font-size: 14px;
     line-height: 2;

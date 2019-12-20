@@ -482,6 +482,13 @@ class DirectoryLister
                 );
                 return ['id' => $Id];
             };
+            $Parsedown->headerText = function ($Text, $Attributes, &$Element, $Level) {
+                $Id = $Attributes['id'] ?? trim(
+                    preg_replace(['/[^a-z\d\x{4e00}-\x{9fa5}]+/u'], '-', strtolower($Text)),
+                    '-'
+                );
+                return '<a href="#' . $Id . '" class="header-anchor">#</a>' . $Text;
+            };
             $Parsedown->linkAttributes = function ($Text, $Attributes, &$Element, $Internal) {
                 $href = strtolower($Attributes['href']);
                 // https://www.chrisyue.com/the-fastest-way-to-implement-starts-with-in-php.html
