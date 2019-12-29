@@ -222,13 +222,20 @@ $breadcrumbs = $lister->listBreadcrumbs();
         });
     </script>
 
-    <!-- Valine https://valine.js.org/ -->
+    <!-- Valine https://valine.js.org/configuration.html -->
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <script>
         new Valine({
             el: '#vcomments',
             appId: 'm9S5QXsdju39LvMs8ooRRIiF-MdYXbMMI',
-            appKey: 'UfBRjySkb4bjPiFuH0Pxe3a9'
+            appKey: 'UfBRjySkb4bjPiFuH0Pxe3a9',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            notify: true, // 邮件提醒
+            verify: false, // 验证码服务
+            // 当前文章页路径，用于区分不同的文章页，以保证正确读取该文章页下的评论列表。
+            path: window.location.href,
+            visitor: true, // 文章访问量统计
+            recordIP: true, // 是否记录评论者IP
         });
 
         // 来必力 https://www.livere.com
