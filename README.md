@@ -95,6 +95,23 @@ woytu Soft：https://www.woytu.com
 * [https://github.com/thephpleague/commonmark](https://github.com/thephpleague/commonmark)
 
 
+---
+
+* [https://packagist.org/search/?q=orm](https://packagist.org/search/?q=orm)
+
+* [https://www.php.net/manual/zh/refs.database.abstract.php](https://www.php.net/manual/zh/refs.database.abstract.php)
+
+* [https://github.com/catfan/Medoo](https://github.com/catfan/Medoo)
+
+* [https://github.com/gabordemooij/redbean](https://github.com/gabordemooij/redbean)
+
+* [https://github.com/doctrine/orm](https://github.com/doctrine/orm)
+
+* [https://github.com/yiisoft/db](https://github.com/yiisoft/db)
+
+* [https://github.com/ADOdb/ADOdb](https://github.com/ADOdb/ADOdb)
+
+
 ## 注意事项：
 
 ### 不显示文件和目录
