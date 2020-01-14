@@ -40,6 +40,13 @@ body.breadcrumb-fixed {
     }
 }
 
+.flash{
+    animation-name: flash;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
 /* -----| HEADER |------------------------------------ */
 
 #page-navbar .navbar-text {
