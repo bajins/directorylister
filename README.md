@@ -7,28 +7,19 @@
 ## 自定义修改
 
 - 比如README的上下边距
-
 - 添加对表格样式多样化的支持
-
 - 添加对锚点定位支持，使用方式：在链接后面加上`#标签的id`，或者点击标题前的锚点链接
-
     1. [Markdown解析添加锚点](https://github.com/woytu/DirectoryLister/commit/1c14776e15a35a680ec02a95278abbb1777a950a)
-
     2. [add 添加锚点可点击的a标签](https://github.com/woytu/DirectoryLister/commit/1d1f90220de2e948f0bba086786e33fb353f7189)
 
   > 示例链接：https://www.woytu.com#readme
 
 
 - 化繁为简：去除顶部链接，如果需要顶部链接版本，请看分支[top-links](https://github.com/woytu/DirectoryLister/tree/top-links)
-
 - [添加gitter聊天室](https://github.com/woytu/DirectoryLister/commit/154df157974ac6f883e3484761ad951e0da90ae6)
-
 - [添加留言](https://github.com/woytu/DirectoryLister/commit/67de302d611e4cf011d8fdee8b7e649e662a1d76)
-
 - [修改网站标题为统一在配置文件中设置](https://github.com/woytu/DirectoryLister/commit/0fab9eae60df0926a06a5859f4d528b859b8be4c)
-
 - 添加面包屑导航栏
-
 - 添加配置`readme_mode`（README文档文件的解析模式：html、md）
 
 
@@ -36,10 +27,6 @@
 ![新旧式样手机效果对比](/sample-graph.png)
 
 
-
-## 演示示例
-
-woytu Soft：https://www.woytu.com
 
 ## 安装
 
@@ -83,32 +70,23 @@ woytu Soft：https://www.woytu.com
 ---
 
 * [https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries](https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries)
-
 * [https://github.com/mrgeneralgoo/typecho-markdown](https://github.com/mrgeneralgoo/typecho-markdown)
 
 ---
 
 * [https://getcomposer.org](https://getcomposer.org)
-
 * [https://github.com/michelf/php-markdown](https://github.com/michelf/php-markdown)
-
 * [https://github.com/thephpleague/commonmark](https://github.com/thephpleague/commonmark)
 
 
 ---
 
 * [https://packagist.org/search/?q=orm](https://packagist.org/search/?q=orm)
-
 * [https://www.php.net/manual/zh/refs.database.abstract.php](https://www.php.net/manual/zh/refs.database.abstract.php)
-
 * [https://github.com/catfan/Medoo](https://github.com/catfan/Medoo)
-
 * [https://github.com/gabordemooij/redbean](https://github.com/gabordemooij/redbean)
-
 * [https://github.com/doctrine/orm](https://github.com/doctrine/orm)
-
 * [https://github.com/yiisoft/db](https://github.com/yiisoft/db)
-
 * [https://github.com/ADOdb/ADOdb](https://github.com/ADOdb/ADOdb)
 
 
@@ -161,3 +139,5 @@ sed -i 's/,scandir//g' /usr/local/php/etc/php.ini
 
 
 本程序基于[逗比魔改](https://github.com/ToyoDAdoubi/DirectoryLister)并基于[Directory Lister原版](https://github.com/DirectoryLister)魔改
+
+- [https://github.com/helloxz/zdir](https://github.com/helloxz/zdir)
