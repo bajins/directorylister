@@ -67,19 +67,14 @@
 
 * [https://www.php.net/manual/zh](https://www.php.net/manual/zh)
 
----
+- [https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries](https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries)
+- [https://github.com/mrgeneralgoo/typecho-markdown](https://github.com/mrgeneralgoo/typecho-markdown)
 
-* [https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries](https://github.com/erusev/parsedown/wiki/Extensions-and-Related-Libraries)
-* [https://github.com/mrgeneralgoo/typecho-markdown](https://github.com/mrgeneralgoo/typecho-markdown)
++ [https://getcomposer.org](https://getcomposer.org)
++ [https://github.com/michelf/php-markdown](https://github.com/michelf/php-markdown)
++ [https://github.com/thephpleague/commonmark](https://github.com/thephpleague/commonmark)
++ [https://github.com/PHPOffice](https://github.com/PHPOffice)
 
----
-
-* [https://getcomposer.org](https://getcomposer.org)
-* [https://github.com/michelf/php-markdown](https://github.com/michelf/php-markdown)
-* [https://github.com/thephpleague/commonmark](https://github.com/thephpleague/commonmark)
-
-
----
 
 * [https://packagist.org/search/?q=orm](https://packagist.org/search/?q=orm)
 * [https://www.php.net/manual/zh/refs.database.abstract.php](https://www.php.net/manual/zh/refs.database.abstract.php)
